@@ -77,7 +77,7 @@ function _MovingScroll(obj){                          //滚动条插件
         });
     }
     if(UM_MovingScroll.watch_mouseup===true){                  //当页面上鼠标抬起时，是否执行滚动条盒子的高度自动变化，根据需要添加该选项
-        _(document).BD('mouseup', function(){console.log(1)
+        _(document).BD('mouseup', function(){
             setTimeout(function() {
                 let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top'));
                 if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box()){
