@@ -2,3 +2,7 @@
 # _MovingScroll()
 　　　**自定义滚动条 及 自定义锚记导航**
 #
+基本用法API :</br>
+```javascript
+sdfsdfsdf
+```
