@@ -1,16 +1,16 @@
 **`>>>  custom-UM 基于 UM库, 在引入 custom-UM 之前必须先引入 UM库  <<<`**</br></br></br>
 # _MovingScroll()
-　　　**自定义滚动条 及 自定义锚记导航**
+　　　***`自定义滚动条 及 自定义锚记导航`***
 #
 基本用法API :
 ```javascript
-_MovingScroll({　　　//滚动条插件    参数：json
-    box:_('.box', 0),                   //容器盒子选择器　　element　　容器盒子不能加任何border、padding和margin相关的任何样式，如有需要可在容器盒子再套一个div来添加样式
-    contentBox:_('.content', 0),　　　//滚动内容盒子选择器　　element
-    scrollBox:_('.scroll', 0),　　　//滚动条盒子选择器　　element
-    speed:50,　　　//滚动速度　　number
-    position:[　　　//锚记定位　　array　　*数组内是各个json对象[json, json, ...]，json内是{clickObj:锚记链接元素，targetObj:锚记书签元素}
-　　　　　　　　　　　//可选项,  默认null
+_MovingScroll({　　　//　滚动条插件    参数：json
+    box:_('.box', 0),                   //　容器盒子选择器　　selector　　容器盒子不能加任何border、padding和margin相关的任何样式，如有需要可在容器盒子再套一个div来添加样式
+    contentBox:_('.content', 0),　　　//　滚动内容盒子选择器　　selector
+    scrollBox:_('.scroll', 0),　　　//　滚动条盒子选择器　　selector
+    speed:50,　　　//　滚动速度　　number
+    position:[　　　//　锚记定位　　array　　*数组内是各个json对象[json, json, ...]，json内是{clickObj:锚记链接元素，targetObj:锚记书签元素}
+　　　　　　　　　　　//　可选项,  默认null
         {clickObj:_('.c1', 0), targetObj:_('.t1', 0)},
         {clickObj:_('.c2', 0), targetObj:_('.t2', 0)},
         {clickObj:_('.c3', 0), targetObj:_('.t3', 0)},
@@ -18,11 +18,11 @@ _MovingScroll({　　　//滚动条插件    参数：json
         {clickObj:_('.c5', 0), targetObj:_('.t5', 0)},
         ...
     ],
-    watch_keyup:false,　　　//当页面上按键抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false
-    watch_mouseup:false,　　　//当页面上鼠标抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false
-    watch_el:{　　　//当点击某个h5元素时, 执行滚动条高度自动变化,可选项,默认false (主要用于配合下拉插件, 点击下拉的caption元素时, 延时执行滚动条变化, 由于caption元素已经阻止了冒泡, 故而增加该选项)
-        el:_('.element', 0),　　　//被点击的元素
-        timeout:1000　　　//执行延时
+    watch_keyup:false,　　　//　当页面上按键抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false　　boolean
+    watch_mouseup:false,　　　//　当页面上鼠标抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false　　boolean
+    watch_el:{　　　//　当点击某个h5元素时, 执行滚动条高度自动变化,可选项,默认false (主要用于配合下拉插件, 点击下拉的caption元素时, 延时执行滚动条变化, 由于caption元素已经阻止了冒泡, 故而增加该选项)　　json
+        el:_('.selector', 0),　　　//　被点击的元素　　selector
+        timeout:1000　　　//　执行延时　　number
     }
 });
 ```
@@ -125,6 +125,60 @@ _MovingScroll({
         {clickObj:_('.title9', 0), targetObj:_('.option9', 0)},
         {clickObj:_('.title10', 0), targetObj:_('.option10', 0)}
     ]
+});
+</script>
+```
+# _PullDown()
+　　　***`下拉选择框`***
+#
+基本用法API :
+```javascript
+_PullDown({　　　//　下拉选择框插件  参数：json
+    caption:_('.caption', 0),　　　//　标题选择器　　selector
+    down:_('.down', 0),　　　//　下拉内容选择器　　selector
+    speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
+    now:false,　　　//　下拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
+    select:false,　　　//　点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
+    D_click:false,　　　//　点击背景是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选，默认false]
+    choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
+});
+```
+基础效果 :</br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)
+基础效果源代码 :
+```javascript
+<style>
+    html, body {width:100%; height:100%; padding:0; margin:0;}
+    #titleBtn {width:200px; height:40px; line-height:40px; text-align:center; cursor:pointer; border:1px solid #0000FF; border-radius:10px; position:absolute; left:20%; top:10%;}
+    #contentBox {width:250px; border:1px solid #FF8000; border-radius:10px; position:absolute; left:20%; top:calc(10% + 50px);}
+    .listOpt {width:85%; height:30px; line-height:30px; border:1px solid gray; border-radius:5px; margin-left:5%; margin-top:5px;}
+    .listOpt_last {margin-bottom:5px;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<div id="titleBtn">_PullDown</div>　　　<!--标题div-->
+<div id="contentBox">　　　<!--下拉内容div-->
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option1</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option5</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option6</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option7</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option8</div>
+    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option9</div>
+    <div class="listOpt listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;option10</div>
+</div>
+</html>
+
+<script>
+_PullDown({
+    caption:_(titleBtn),　　　//　标题选择器　　selector
+    down:_(contentBox),　　　//　下拉内容选择器　　selector
+    speed:.5　　　//　速度(在几秒内完成过渡)
 });
 </script>
 ```
