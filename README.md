@@ -182,3 +182,57 @@ _PullDown({
 });
 </script>
 ```
+# _PullLeft()
+　　　***`左拉选择框`***
+#
+基本用法API :
+```javascript
+_PullLeft({　　　//　左拉内容过渡插件  参数：json
+    caption:_('.caption', 0),　　　//　标题选择器　　element
+    left:_('.left', 0),　　　//　左拉内容选择器　　element
+    speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
+    now:false,　　　//　左拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
+    select:false,　　　//　点击左拉框是否隐藏左拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
+    D_click:false,　　　//　点击背景是否隐藏左拉框(false隐藏或者true不隐藏)　　boolean　[可选，默认false]
+    choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
+});
+```
+基础效果 :</br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br>
+基础效果源代码 :
+```javascript
+<style>
+    html, body {width:100%; height:100%; padding:0; margin:0;}
+    #titleBtn {width:40px; height:200px; line-height:50px; text-align:center; cursor:pointer; border:1px solid #0000FF; border-radius:10px; position:absolute; left:20%; top:10%;}
+    #contentBox {height:200px; border:1px solid #FF8000; border-radius:10px; position:absolute; left:calc(20% + 50px); top:10%;}
+    .listOpt {width:30px; height:180px; line-height:36px; text-align:center; border:1px solid gray; border-radius:5px; float:left; margin-left:10px; margin-top:10px;}
+    .listOpt_last {margin-right:10px;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<div id="titleBtn"></br>点</br>我</br></div>
+<div id="contentBox">
+    <div class="listOpt"></br>选</br>项</br>1</br></div>
+    <div class="listOpt"></br>选</br>项</br>2</br></div>
+    <div class="listOpt"></br>选</br>项</br>3</br></div>
+    <div class="listOpt"></br>选</br>项</br>4</br></div>
+    <div class="listOpt"></br>选</br>项</br>5</br></div>
+    <div class="listOpt"></br>选</br>项</br>6</br></div>
+    <div class="listOpt"></br>选</br>项</br>7</br></div>
+    <div class="listOpt"></br>选</br>项</br>8</br></div>
+    <div class="listOpt"></br>选</br>项</br>9</br></div>
+    <div class="listOpt listOpt_last"></br>选</br>项</br>10</br></div>
+</div>
+</html>
+
+<script>
+_PullLeft({
+    caption:_(titleBtn),　　//　标题选择器
+    left:_(contentBox),　　//　左拉内容选择器
+    speed:.5　　//　速度(在几秒内完成过渡)
+});
+</script>
+```
