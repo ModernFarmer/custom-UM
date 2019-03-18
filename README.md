@@ -27,7 +27,7 @@ _MovingScroll({　　　//　滚动条插件    参数：json
 });
 ```
 基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_MovingScroll.gif)
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_MovingScroll.gif)</br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -144,7 +144,7 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 });
 ```
 基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)</br>
 基础效果源代码 :
 ```javascript
 <style>
