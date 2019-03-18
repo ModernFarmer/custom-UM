@@ -141,27 +141,6 @@ function _MovingScroll(obj){                          //滚动条插件
     }
 };
 
-/*_MovingScroll({                          //滚动条插件    参数：json
-    box:_('.box', 0),                   //容器盒子选择器  element       容器盒子不能加任何border、padding和margin相关的任何样式，如有需要可在容器盒子再套一个div来添加样式
-    contentBox:_('.content', 0),        //滚动内容盒子选择器  element
-    scrollBox:_('.scroll', 0),          //滚动条盒子选择器  element     滚动条盒子不能加任何border、padding和margin相关的任何样式
-    speed:50,                           //滚动速度  number
-    position:[                          //锚记定位  array   *数组内是各个json对象[json, json, ...]，json内是{clickObj:锚记链接元素，targetObj:锚记书签元素}
-                                        //可选项,  默认null
-        {clickObj:_('.c1', 0), targetObj:_('.t1', 0)},
-        {clickObj:_('.c2', 0), targetObj:_('.t2', 0)},
-        {clickObj:_('.c3', 0), targetObj:_('.t3', 0)},
-        {clickObj:_('.c4', 0), targetObj:_('.t4', 0)},
-        {clickObj:_('.c5', 0), targetObj:_('.t5', 0)}
-    ],
-    watch_keyup:false,                  //当页面上按键抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false
-    watch_mouseup:false,                 //当页面上鼠标抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false
-    watch_el:{                          //当点击某个h5元素时, 执行滚动条高度自动变化,可选项,默认false (主要用于配合下拉插件, 点击下拉的caption元素时, 延时执行滚动条变化, 由于caption元素已经阻止了冒泡, 故而增加该选项)
-        el:_('.element', 0),     //被点击的元素
-        timeout:1000             //执行延时
-    }
-});*/
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _PullDown(obj){                           //下拉内容过渡插件
@@ -173,7 +152,6 @@ function _PullDown(obj){                           //下拉内容过渡插件
         select:obj.select || false,
         D_click:obj.D_click || false,
         choosable:obj.choosable || false,
-        isMobile:obj.isMobile || false,
         getStyleInf:function(dom, typeName){
             if(window.getComputedStyle){
                 return parseInt(getComputedStyle(dom,false)[typeName]);
@@ -210,7 +188,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
     if(UM_PullDown.now===true)UM_PullDown.down.css({opacity:1, height:UM_PullDown.height(), overflow:'hidden'});
     if(UM_PullDown.now===false)UM_PullDown.down.css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0, overflow:'hidden'});
     if(UM_PullDown.choosable===false)UM_PullDown.caption.choosable(false);
-    if(!UM_PullDown.isMobile)UM_PullDown.caption.css({cursor:'pointer'});
+    UM_PullDown.caption.css({cursor:'pointer'});
     UM_PullDown.caption.BD('click', function(event){
         _stopPropagation(event);
         if(UM_PullDown.now===false){
@@ -219,6 +197,12 @@ function _PullDown(obj){                           //下拉内容过渡插件
             UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
         };
         UM_PullDown.now=!UM_PullDown.now;
+    });
+    _(window).BD('resize', function(){
+        if(UM_PullDown.caption.el){
+            UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
+            UM_PullDown.now=false;
+        }
     });
     if(UM_PullDown.D_click===false){
         _(document).BD('click', function(){
@@ -242,8 +226,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
     now:false,                            //下拉内容初始状态(false隐藏或者true显示)            boolean     [可选, 默认false]
     select:false,                         //点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)  boolean     [可选, 默认false]
     D_click:false,                        //点击背景是否隐藏下拉框(false隐藏或者true不隐藏)    boolean     [可选，默认false]
-    choosable:false,                       //标题选择器内的文字是否可被选中(false不可被选中)    boolean     [可选, 默认false]
-    isMobile:false                         //环境是否为移动端(移动端没有cursor样式)(true代表是)   boolean     [可选, 默认false]
+    choosable:false                       //标题选择器内的文字是否可被选中(false不可被选中)    boolean     [可选, 默认false]
 });*/
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -257,7 +240,6 @@ function _PullLeft(obj){                           //左拉内容过渡插件
         select:obj.select || false,
         D_click:obj.D_click || true,
         choosable:obj.choosable || false,
-        isMobile:obj.isMobile || false,
         getStyleInf:function(dom, typeName){
             if(window.getComputedStyle){
                 return parseInt(getComputedStyle(dom,false)[typeName]);
@@ -292,7 +274,7 @@ function _PullLeft(obj){                           //左拉内容过渡插件
     if(UM_PullLeft.now===true)UM_PullLeft.left.css({opacity:1, width:UM_PullLeft.width(), overflow:'hidden'});
     if(UM_PullLeft.now===false)UM_PullLeft.left.css({opacity:0, width:0, paddingLeft:0, paddingRight:0, marginLeft:0, marginRight:0, overflow:'hidden'});
     if(UM_PullLeft.choosable===false)UM_PullLeft.caption.choosable(false);
-    if(!UM_PullLeft.isMobile)UM_PullLeft.caption.css({cursor:'pointer'});
+    UM_PullLeft.caption.css({cursor:'pointer'});
     UM_PullLeft.caption.BD('click', function(event){
         _stopPropagation(event);
         if(UM_PullLeft.now===false){
@@ -301,6 +283,12 @@ function _PullLeft(obj){                           //左拉内容过渡插件
             UM_PullLeft.left.transition(UM_PullLeft.speed+'s linear').transformOrigin('LEFT CENTER').css({opacity:0, width:0, paddingLeft:0, paddingRight:0, marginLeft:0, marginRight:0});
         };
         UM_PullLeft.now=!UM_PullLeft.now;
+    });
+    _(window).BD('resize', function(){
+        if(UM_PullLeft.caption.el){
+            UM_PullLeft.left.transition(UM_PullLeft.speed+'s linear').transformOrigin('LEFT CENTER').css({opacity:0, width:0, paddingLeft:0, paddingRight:0, marginLeft:0, marginRight:0});
+            UM_PullLeft.now=false;
+        }
     });
     if(UM_PullLeft.D_click===true){
         _(document).BD('click', function(){
@@ -325,7 +313,6 @@ function _PullLeft(obj){                           //左拉内容过渡插件
     select:false,                         //点击左拉框是否隐藏左拉框(false隐藏或者true不隐藏)  boolean     [可选, 默认false]
     D_click:false,                        //点击背景是否隐藏左拉框(false隐藏或者true不隐藏)    boolean     [可选，默认false]
     choosable:false,                       //标题选择器内的文字是否可被选中(false不可被选中)    boolean     [可选, 默认false]
-    isMobile:false                         //环境是否为移动端(移动端没有cursor样式)(true代表是)   boolean     [可选, 默认false]
 });*/
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
