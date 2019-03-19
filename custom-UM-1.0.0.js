@@ -219,16 +219,6 @@ function _PullDown(obj){                           //下拉内容过渡插件
     }
 };
 
-/*_PullDown({                               //下拉内容过渡插件  参数：json
-    caption:_('.caption', 0),             //标题选择器                                         element
-    down:_('.down', 0),                   //下拉内容选择器                                     element
-    speed:1,                              //速度(在几秒内完成过渡)                             number      [可选, 默认0.5]
-    now:false,                            //下拉内容初始状态(false隐藏或者true显示)            boolean     [可选, 默认false]
-    select:false,                         //点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)  boolean     [可选, 默认false]
-    D_click:false,                        //点击背景是否隐藏下拉框(false隐藏或者true不隐藏)    boolean     [可选，默认false]
-    choosable:false                       //标题选择器内的文字是否可被选中(false不可被选中)    boolean     [可选, 默认false]
-});*/
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _PullLeft(obj){                           //左拉内容过渡插件
@@ -305,16 +295,6 @@ function _PullLeft(obj){                           //左拉内容过渡插件
     }
 };
 
-/*_PullLeft({                               //左拉内容过渡插件  参数：json
-    caption:_('.caption', 0),             //标题选择器                                         element
-    left:_('.left', 0),                   //左拉内容选择器                                     element
-    speed:1,                              //速度(在几秒内完成过渡)                             number      [可选, 默认0.5]
-    now:false,                            //左拉内容初始状态(false隐藏或者true显示)            boolean     [可选, 默认false]
-    select:false,                         //点击左拉框是否隐藏左拉框(false隐藏或者true不隐藏)  boolean     [可选, 默认false]
-    D_click:false,                        //点击背景是否隐藏左拉框(false隐藏或者true不隐藏)    boolean     [可选，默认false]
-    choosable:false,                       //标题选择器内的文字是否可被选中(false不可被选中)    boolean     [可选, 默认false]
-});*/
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _Drag(obj){                        //拖拽插件
@@ -324,6 +304,8 @@ function _Drag(obj){                        //拖拽插件
         parent:obj.parent || _('body', 0),
         axis:obj.axis || false
     };
+
+    UM_Drag.dragBox.choosable();
 
     if(UM_Drag.axis && UM_Drag.axis=='x'){
         UM_Drag.mousedownBox.BD('mousedown', function(event){
@@ -404,13 +386,6 @@ function _Drag(obj){                        //拖拽插件
         });
     };
 };
-
-/*_Drag({               //拖拽插件，参数:json
-  mousedownBox:_('.aaa', 0),                //被鼠标左键按下后发生拖拽的选择器      element
-  dragBox:_('.box', 0),                     //被拖拽主体的选择器                    element       [可选, 默认为mousedownBox]
-  parent:_('.bigbox', 0),                    //被拖拽元素的父级选择器                element       [可选, 默认为_('body',0)]
-  axis:'x'                                   //被拖拽元素沿哪个轴运动            string('x'或者'y')            [可选, 默认为false(即沿x轴和y轴)]
-});*/
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
