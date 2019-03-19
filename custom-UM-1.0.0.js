@@ -301,11 +301,12 @@ function _Drag(obj){                        //拖拽插件
     let UM_Drag={
         mousedownBox:obj.mousedownBox,
         dragBox:obj.dragBox || obj.mousedownBox,
-        parent:obj.parent || _('body', 0),
         axis:obj.axis || false
     };
 
     UM_Drag.dragBox.choosable();
+
+    let _parent=UM_Drag.dragBox.el.offsetParent;
 
     if(UM_Drag.axis && UM_Drag.axis=='x'){
         UM_Drag.mousedownBox.BD('mousedown', function(event){
@@ -317,8 +318,8 @@ function _Drag(obj){                        //拖拽插件
                 let Drag_left=_scrollDistance().x+event.clientX-Drag_S_left;
                 if(Drag_left<0){
                     Drag_left=0;
-                }else if(Drag_left>(UM_Drag.parent.el.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
-                    Drag_left=UM_Drag.parent.el.offsetWidth-UM_Drag.dragBox.el.offsetWidth;
+                }else if(Drag_left>(_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
+                    Drag_left=_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth;
                 }
                 UM_Drag.dragBox.el.style.left=Drag_left+'px';
             };
@@ -340,8 +341,8 @@ function _Drag(obj){                        //拖拽插件
                 let Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
                 if(Drag_top<0){
                     Drag_top=0;
-                }else if(Drag_top>(UM_Drag.parent.el.offsetHeight-UM_Drag.dragBox.el.offsetHeight)){
-                    Drag_top=UM_Drag.parent.el.offsetHeight-UM_Drag.dragBox.el.offsetHeight;
+                }else if(Drag_top>(_parent.offsetHeight-UM_Drag.dragBox.el.offsetHeight)){
+                    Drag_top=_parent.offsetHeight-UM_Drag.dragBox.el.offsetHeight;
                 }
                 UM_Drag.dragBox.el.style.top=Drag_top+'px';
             };
@@ -365,13 +366,13 @@ function _Drag(obj){                        //拖拽插件
                 let Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
                 if(Drag_left<0){
                     Drag_left=0;
-                }else if(Drag_left>(UM_Drag.parent.el.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
-                    Drag_left=UM_Drag.parent.el.offsetWidth-UM_Drag.dragBox.el.offsetWidth;
+                }else if(Drag_left>(_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
+                    Drag_left=_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth;
                 }
                 if(Drag_top<0){
                     Drag_top=0;
-                }else if(Drag_top>(UM_Drag.parent.el.offsetHeight-UM_Drag.dragBox.el.offsetHeight)){
-                    Drag_top=UM_Drag.parent.el.offsetHeight-UM_Drag.dragBox.el.offsetHeight;
+                }else if(Drag_top>(_parent.offsetHeight-UM_Drag.dragBox.el.offsetHeight)){
+                    Drag_top=_parent.offsetHeight-UM_Drag.dragBox.el.offsetHeight;
                 }
                 UM_Drag.dragBox.el.style.left=Drag_left+'px';
                 UM_Drag.dragBox.el.style.top=Drag_top+'px';
