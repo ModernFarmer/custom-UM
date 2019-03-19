@@ -143,8 +143,8 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
 });
 ```
-基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)</br>
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -197,8 +197,8 @@ _PullLeft({　　　//　左拉内容过渡插件  参数：json
     choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
 });
 ```
-基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br>
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -250,8 +250,8 @@ _Drag({　　　//　拖拽插件，参数:json
 ***注: 被拖拽主体元素必须设置 position:absolute|relative; 样式 和 top:xxx 样式
 ***注: 被拖拽主体元素的拖拽范围会被限制在 [用于定位它的元素] 的宽高范围内(通俗地说, 就是被拖拽主体的第一个有 position:absolute|relative|fixed; 属性的父元素)
 ```
-基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_Drag.gif)</br>
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_Drag.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -302,8 +302,8 @@ _showInputImg({　　　//　按比例显示文本域图片插件
     }
 });
 ```
-基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showInputImg.gif)</br>
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showInputImg.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
