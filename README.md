@@ -1,6 +1,6 @@
 **`>>>  custom-UM 基于 UM库, 在引入 custom-UM 之前必须先引入 UM库  <<<`**</br></br></br>
 # _MovingScroll()
-　　　***`自定义滚动条 及 自定义锚记导航`***
+　　　***`自定义滚动条 及 自定义锚记导航插件`***
 #
 基本用法API :
 ```javascript
@@ -129,7 +129,7 @@ _MovingScroll({
 </script>
 ```
 # _PullDown()
-　　　***`下拉选择框`***
+　　　***`下拉选择框插件`***
 #
 基本用法API :
 ```javascript
@@ -183,13 +183,13 @@ _PullDown({
 </script>
 ```
 # _PullLeft()
-　　　***`左拉选择框`***
+　　　***`左拉选择框插件`***
 #
 基本用法API :
 ```javascript
 _PullLeft({　　　//　左拉内容过渡插件  参数：json
-    caption:_('.caption', 0),　　　//　标题选择器　　element
-    left:_('.left', 0),　　　//　左拉内容选择器　　element
+    caption:_('.caption', 0),　　　//　标题选择器　　selector
+    left:_('.left', 0),　　　//　左拉内容选择器　　selector
     speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
     now:false,　　　//　左拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
     select:false,　　　//　点击左拉框是否隐藏左拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
@@ -233,6 +233,59 @@ _PullLeft({
     caption:_(titleBtn),　　//　标题选择器
     left:_(contentBox),　　//　左拉内容选择器
     speed:.5　　//　速度(在几秒内完成过渡)
+});
+</script>
+```
+# _Drag()
+　　　***`拖拽插件`***
+#
+基本用法API :
+```javascript
+_Drag({　　　//　拖拽插件，参数:json
+    mousedownBox:_('.aaa', 0),　　　//　被鼠标左键按下后发生拖拽的选择器(即触发器)　　selector
+    dragBox:_('.box', 0),　　　//　被拖拽主体的选择器　　selector　[可选, 默认为mousedownBox]
+    axis:'x'　　　//　被拖拽元素沿哪个轴运动　　string('x'或者'y')　[可选, 默认为 null (即同时沿x轴和y轴)]
+});
+
+***注: 被拖拽主体元素必须设置 position:absolute|relative; 样式 和 top:xxx 样式
+***注: 被拖拽主体元素的拖拽范围会被限制在 [用于定位它的元素] 的宽高范围内(通俗地说, 就是被拖拽主体的第一个有 position:absolute|relative|fixed; 属性的父元素)
+```
+基础效果 :</br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br>
+基础效果源代码 :
+```javascript
+<style>
+    html, body {width:100%; height:100%; padding:0; margin:0;}
+    #Box {width:60%; height:60%; min-width:300px; min-height:200px; background:gray; position:absolute; left:20%; top:15%;}
+    #dragBox_1 {width:30%; height:30%; background:salmon; position:absolute; left:20%; top:20%; z-index:10;}
+    #dragBtn {width:30%; height:30%; background:black; cursor:pointer; text-align:center; color:white; position:absolute; right:0; top:0;}
+    #dragBox_2 {width:20%; height:10%; background:yellow; cursor:pointer; position:absolute; left:0; bottom:0;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<div id="Box">
+    <div id="dragBox_1">
+        <div id="dragBtn">拖 我</div>
+    </div>
+    <div id="dragBox_2"></div>
+</div>
+</html>
+
+<script>
+_(dragBtn).setH(dragBtn, {fontSize:.5, lineHeight:1});　　//　div#dragBtn的字体行高根据div#dragBtn的高度变化
+
+_Drag({
+    mousedownBox:_(dragBtn),　　//　被鼠标左键按下后发生拖拽的选择器(即触发器)
+    dragBox:_(dragBox_1)　　//　被拖拽主体的选择器
+});
+
+_Drag({
+    mousedownBox:_(dragBox_2),　　//　被鼠标左键按下后发生拖拽的选择器(即触发器)
+    dragBox:_(dragBox_2),　　//　被拖拽主体的选择器
+    axis:'x'　　//　被拖拽元素沿哪个轴运动
 });
 </script>
 ```
