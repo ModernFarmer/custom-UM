@@ -390,58 +390,74 @@ function _Drag(obj){                        //拖拽插件
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function _showInputImg(json, string){                       //显示<input type="file" id/class="inputName">表单所选择的图片到指定的imgBox
+function _showInputImg(json){                       //显示文本域表单所选择的图片到指定的元素上
     let UM_ShowInputImg={
-        inputName:json.inputName,
-        imgBoxName:json.imgBoxName,
+        frame:json.frame,
+        imgBox:json.imgBox,
         isNotImg:json.isNotImg || null
     };
 
-    let UM_ShowInputImg_str=string||'';
+    let _str=''+Math.random();
+    _str=_str.split('.')[1];
+    let UM_ShowInputImg_className='custom_UM_showInputImg_classname_'+_str;
+    let _castom=true;
+    let _timerName='timer_'+UM_ShowInputImg_className;
 
-    _(UM_ShowInputImg.imgBoxName, 0).el.innerHTML='';
-    let file=_(UM_ShowInputImg.inputName, 0).el.files;
-    if(!file[0])return;
-    let imgObj=new Image();
-    let UM_ShowInputImg_className='UM_frame_img_custom_classname'+UM_ShowInputImg_str;
-    imgObj.className=UM_ShowInputImg_className;               
-    if(!_isImg(file[0].type)){      //判断所选文件是否为图片文件
-        if(UM_ShowInputImg.isNotImg){
-            UM_ShowInputImg.isNotImg();
+    UM_ShowInputImg.frame.BD('change', function(){
+        UM_ShowInputImg.imgBox.el.innerHTML='';
+        let file=UM_ShowInputImg.frame.el.files;
+        if(!file[0])return;
+        let imgObj=new Image();
+        imgObj.className=UM_ShowInputImg_className;               
+        if(!_isImg(UM_ShowInputImg.frame.el)){      //判断所选文件是否为图片文件
+            if(UM_ShowInputImg.isNotImg){
+                UM_ShowInputImg.isNotImg();
+            }
+            return;
+        };
+        let UM_ShowInputImg_url=null;
+        if(window.createObjectURL!=undefined){
+            UM_ShowInputImg_url=window.createObjectURL(file[0]);          //basic
+        }else if(window.URL!=undefined){
+            UM_ShowInputImg_url=window.URL.createObjectURL(file[0]);      //firefox
+        }else if(window.webkitURL!=undefined){
+            UM_ShowInputImg_url=window.webkitURL.createObjectURL(file[0]);   //chrome
         }
-        return;
-    };
-    let UM_ShowInputImg_url=null;
-    if(window.createObjectURL!=undefined){
-        UM_ShowInputImg_url=window.createObjectURL(file[0]);          //basic
-    }else if(window.URL!=undefined){
-        UM_ShowInputImg_url=window.URL.createObjectURL(file[0]);      //firefox
-    }else if(window.webkitURL!=undefined){
-        UM_ShowInputImg_url=window.webkitURL.createObjectURL(file[0]);   //chrome
-    }
-    imgObj.src=UM_ShowInputImg_url;
+        imgObj.src=UM_ShowInputImg_url;
 
-    imgObj.onload=function(){
-        _(UM_ShowInputImg.imgBoxName, 0).el.appendChild(imgObj);
-        _('.'+UM_ShowInputImg_className, 0).transition('.2s ease').css({opacity:0});
-        _('.'+UM_ShowInputImg_className, 0).center();
-        let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
-        let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
-        if(parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('width'))/parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('height'))<w/h){
-            _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('width'))*.98+'px', height:parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('width'))*.98*h/w+'px', opacity:1});
-        }else if(parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('width'))/parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('height'))>=w/h){
-            _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('height'))*.98*w/h+'px', height:parseInt(_(UM_ShowInputImg.imgBoxName, 0).getStyle('height'))*.98+'px', opacity:1});
-        }
-    };
+        imgObj.onload=function(){
+            UM_ShowInputImg.imgBox.el.appendChild(imgObj);
+            _('.'+UM_ShowInputImg_className, 0).transition('.2s ease').css({opacity:0});
+            _('.'+UM_ShowInputImg_className, 0).center();
+            let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
+            let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
+            if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
+                _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
+            }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
+                _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98*w/h+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98+'px', opacity:1});
+            }
+
+            _(window).BD('resize', function(){
+                if(window[_timerName])clearTimeout(window[_timerName]);
+                window[_timerName]=setTimeout(function(){
+                    if(_ifDom('.'+UM_ShowInputImg_className)){
+                        _('.'+UM_ShowInputImg_className, 0).center();
+                        let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
+                        let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
+                        if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
+                            _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
+                        }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
+                            _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98*w/h+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98+'px', opacity:1});
+                        }
+                        if(window[_timerName])window[_timerName]=null;
+                    }
+                }, 500);
+            });
+        };
+    });
 };
 
-/*_showInputImg({
-    inputName:'#input',             //<input type="file">表单的选择器名字
-    imgBoxName:'.box',                  //显示图片的容器的选择器名字
-    isNotImg:function(){            //如果所选的不是图片类型的文件的回调函数[可选]     默认为null
-        //todo...
-    }
-}, string);                    //string:   如果同一页面有多个该插件, 则可以添加第三个参数区分开生成的图片的className   */
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _showingImg(asDomName, url, string){                       //按比例显示图片
     let UM_showingImg_um=_(asDomName, 0);
