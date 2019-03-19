@@ -289,3 +289,44 @@ _Drag({
 });
 </script>
 ```
+# _showInputImg()
+　　　***`将文本域表单所选择的图片按比例显示到指定的元素上`***
+#
+基本用法API :
+```javascript
+_showInputImg({　　　//　按比例显示文本域图片插件
+    frame:_('#box', 0),　　　//　<input type="file">表单的选择器
+    imgBox:_('.box', 0),　　　//　显示图片的容器的选择器
+    isNotImg:function(){　　　//　如果所选的不是图片类型的文件的回调函数[可选]　　默认为null
+        //todo...
+    }
+});
+```
+基础效果 :</br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showInputImg.gif)</br>
+基础效果源代码 :
+```javascript
+<style>
+    html, body {width:100%; height:100%; padding:0; margin:0;}
+    #inputId {position:absolute; left:50px; top:30px;}
+    #imgBoxId {width:20%; height:20%; border:1px solid black; border-radius:15px; overflow:hidden; position:absolute; left:50px; top:80px;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<input type="file" id="inputId">
+<div id="imgBoxId"></div>
+</html>
+
+<script>
+_showInputImg({
+    frame:_(inputId),　　//　<input type="file">表单的选择器
+    imgBox:_(imgBoxId),　　//　显示图片的容器的选择器
+    isNotImg:function(){　　//　如果所选的不是图片类型的文件的回调函数
+        alert('丫的, 这货不是图片!')
+    }
+});
+</script>
+```
