@@ -251,7 +251,7 @@ _Drag({　　　//　拖拽插件，参数:json
 ***注: 被拖拽主体元素的拖拽范围会被限制在 [用于定位它的元素] 的宽高范围内(通俗地说, 就是被拖拽主体的第一个有 position:absolute|relative|fixed; 属性的父元素)
 ```
 基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_Drag.gif)</br>
 基础效果源代码 :
 ```javascript
 <style>
