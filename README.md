@@ -46,65 +46,67 @@ _MovingScroll({　　　//　滚动条插件    参数：json
 <script src="custom-UM-1.0.0.js"></script>
 
 <html>
-<div id="box">    <!-- 总容器div -->
-    <div id="listBox">
-        <div class="listText title1">001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title2">002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title3">003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title4">004&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title5">005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title6">006&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title7">007&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title8">008&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title9">009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-        <div class="listText title10">010&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-    </div>
+<body>
+    <div id="box">    <!-- 总容器div -->
+        <div id="listBox">
+            <div class="listText title1">001&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title2">002&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title3">003&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title4">004&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title5">005&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title6">006&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title7">007&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title8">008&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title9">009&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div class="listText title10">010&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
 
-    <div id="scrollBox"></div>    <!-- 滚动条div -->
+        <div id="scrollBox"></div>    <!-- 滚动条div -->
 
-    <div id="contentBox">    <!-- 内容div -->
-        <div class="option1">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;001</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option2">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;002</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option3">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;003</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option4">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;004</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option5">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;005</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option6">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;006</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option7">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;007</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option8">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;008</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option9">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;009</div>
-            <div class="moduleContent"></div>
-        </div>
-        <div class="option10">
-            <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;010</div>
-            <div class="moduleContent"></div>
+        <div id="contentBox">    <!-- 内容div -->
+            <div class="option1">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;001</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option2">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;002</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option3">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;003</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option4">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;004</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option5">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;005</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option6">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;006</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option7">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;007</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option8">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;008</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option9">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;009</div>
+                <div class="moduleContent"></div>
+            </div>
+            <div class="option10">
+                <div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;010</div>
+                <div class="moduleContent"></div>
+            </div>
         </div>
     </div>
-</div>
+</body>
 </html>
 
 <script>
@@ -159,19 +161,21 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 <script src="custom-UM-1.0.0.js"></script>
 
 <html>
-<div id="titleBtn">_PullDown</div>　　　<!--标题div-->
-<div id="contentBox">　　　<!--下拉内容div-->
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option1</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option5</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option6</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option7</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option8</div>
-    <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option9</div>
-    <div class="listOpt listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;option10</div>
-</div>
+<body>
+    <div id="titleBtn">_PullDown</div>　　　<!--标题div-->
+    <div id="contentBox">　　　<!--下拉内容div-->
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option1</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option5</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option6</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option7</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option8</div>
+        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option9</div>
+        <div class="listOpt listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;option10</div>
+    </div>
+</body>
 </html>
 
 <script>
@@ -213,19 +217,21 @@ _PullLeft({　　　//　左拉内容过渡插件  参数：json
 <script src="custom-UM-1.0.0.js"></script>
 
 <html>
-<div id="titleBtn"></br>点</br>我</br></div>
-<div id="contentBox">
-    <div class="listOpt"></br>选</br>项</br>1</br></div>
-    <div class="listOpt"></br>选</br>项</br>2</br></div>
-    <div class="listOpt"></br>选</br>项</br>3</br></div>
-    <div class="listOpt"></br>选</br>项</br>4</br></div>
-    <div class="listOpt"></br>选</br>项</br>5</br></div>
-    <div class="listOpt"></br>选</br>项</br>6</br></div>
-    <div class="listOpt"></br>选</br>项</br>7</br></div>
-    <div class="listOpt"></br>选</br>项</br>8</br></div>
-    <div class="listOpt"></br>选</br>项</br>9</br></div>
-    <div class="listOpt listOpt_last"></br>选</br>项</br>10</br></div>
-</div>
+<body>
+    <div id="titleBtn"></br>点</br>我</br></div>
+    <div id="contentBox">
+        <div class="listOpt"></br>选</br>项</br>1</br></div>
+        <div class="listOpt"></br>选</br>项</br>2</br></div>
+        <div class="listOpt"></br>选</br>项</br>3</br></div>
+        <div class="listOpt"></br>选</br>项</br>4</br></div>
+        <div class="listOpt"></br>选</br>项</br>5</br></div>
+        <div class="listOpt"></br>选</br>项</br>6</br></div>
+        <div class="listOpt"></br>选</br>项</br>7</br></div>
+        <div class="listOpt"></br>选</br>项</br>8</br></div>
+        <div class="listOpt"></br>选</br>项</br>9</br></div>
+        <div class="listOpt listOpt_last"></br>选</br>项</br>10</br></div>
+    </div>
+</body>
 </html>
 
 <script>
@@ -266,12 +272,14 @@ _Drag({　　　//　拖拽插件，参数:json
 <script src="custom-UM-1.0.0.js"></script>
 
 <html>
-<div id="Box">
-    <div id="dragBox_1">
-        <div id="dragBtn">拖 我</div>
+<body>
+    <div id="Box">
+        <div id="dragBox_1">
+            <div id="dragBtn">拖 我</div>
+        </div>
+        <div id="dragBox_2"></div>
     </div>
-    <div id="dragBox_2"></div>
-</div>
+</body>
 </html>
 
 <script>
@@ -295,12 +303,14 @@ _Drag({
 基本用法API :
 ```javascript
 _showInputImg({　　　//　按比例显示文本域图片插件
-    frame:_('#box', 0),　　　//　<input type="file">表单的选择器
-    imgBox:_('.box', 0),　　　//　显示图片的容器的选择器
-    isNotImg:function(){　　　//　如果所选的不是图片类型的文件的回调函数[可选]　　默认为null
+    frame:_('#box', 0),　　　//　<input type="file">表单的选择器　　selector
+    imgBox:_('.box', 0),　　　//　显示图片的容器的选择器　　selector
+    isNotImg:function(){　　　//　如果所选的不是图片类型的文件的回调函数[可选]　　function　　默认为null
         //todo...
     }
 });
+
+***注: 显示图片的容器的选择器(即imgBox)所选的元素必须设置 position:absolute|relative|fixed; 否则无法正确显示图片
 ```
 基础效果 :</br></br>
 ![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showInputImg.gif)</br></br>
@@ -316,8 +326,10 @@ _showInputImg({　　　//　按比例显示文本域图片插件
 <script src="custom-UM-1.0.0.js"></script>
 
 <html>
-<input type="file" id="inputId">
-<div id="imgBoxId"></div>
+<body>
+    <input type="file" id="inputId">
+    <div id="imgBoxId"></div>
+</body>
 </html>
 
 <script>
@@ -328,5 +340,55 @@ _showInputImg({
         alert('丫的, 这货不是图片!')
     }
 });
+</script>
+```
+# _showingImg()
+　　　***`按比例将图片显示到指定元素上`***
+#
+基本用法API :
+```javascript
+_showingImg(imgBox, url);
+
+    //参数 :  imgBox :       图片容器选择器　　selector
+              url :          图片路径　　path
+***注: 显示图片的容器的选择器(即imgBox)所选的元素必须设置 position:absolute|relative|fixed; 否则无法正确显示图片
+```
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showingImg.gif)</br></br>
+基础效果源代码 :
+```javascript
+<style>
+    html, body {width:100%; height:100%; background:#C0C0C0; padding:0; margin:0;}
+    #btn1 {width:100px; margin-left:30px; margin-top:20px;}
+    #btn2 {width:100px; margin-left:20px;}
+    #btn3 {width:100px; margin-left:20px;}
+    #imgBox {width:30%; height:35%; border:1px solid #FF8000; border-radius:10px; position:relative; left:30px; top:20px;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<body>
+    <button id="btn1">图 1</button>
+    <button id="btn2">图 2</button>
+    <button id="btn3">图 3</button>
+
+    <div id="imgBox"></div>    <!--图片容器-->
+</body>
+</html>
+
+<script>
+btn1.onclick = function(){
+    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img1_showingImg.gif');
+};
+
+btn2.onclick = function(){
+    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img2_showingImg.gif');
+};
+
+btn3.onclick = function(){
+    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img3_showingImg.gif');
+};
 </script>
 ```
