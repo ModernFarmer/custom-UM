@@ -427,14 +427,16 @@ function _showInputImg(json){                       //显示文本域表单所�
 
         imgObj.onload=function(){
             UM_ShowInputImg.imgBox.el.appendChild(imgObj);
-            _('.'+UM_ShowInputImg_className, 0).transition('.2s ease').css({opacity:0});
-            _('.'+UM_ShowInputImg_className, 0).center();
-            let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
-            let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
-            if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
-                _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
-            }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
-                _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98*w/h+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98+'px', opacity:1});
+            if(_ifDom('.'+UM_ShowInputImg_className)){
+                _('.'+UM_ShowInputImg_className, 0).transition('.2s ease').css({opacity:0});
+                _('.'+UM_ShowInputImg_className, 0).center();
+                let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
+                let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
+                if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
+                    _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
+                }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
+                    _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98*w/h+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('height'))*.98+'px', opacity:1});
+                }
             }
 
             _(window).BD('resize', function(){
@@ -459,18 +461,20 @@ function _showInputImg(json){                       //显示文本域表单所�
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function _showingImg(asDomName, url, string){                       //按比例显示图片
-    let UM_showingImg_um=_(asDomName, 0);
-    let UM_showingImg_dom=_(asDomName, 0).el;
-    let UM_showingImg_str=string||'';
-    let UM_showingImg_name_class='UM_frame_simpleImg_custom_classname'+UM_showingImg_str;
+function _showingImg(_selector, url){                       //按比例显示图片
+    let UM_showingImg_um=_selector;
+    let UM_showingImg_dom=_selector.el;
+    let UM_showingImg_str=''+Math.random();
+    UM_showingImg_str=UM_showingImg_str.split('.')[1];
+    let UM_showingImg_name_class='custom_UM_showingImg_classname_'+UM_showingImg_str;
+    let _timerName='timer_'+UM_showingImg_name_class;
     UM_showingImg_dom.innerHTML='';
     let imgObj=new Image();
     imgObj.className=UM_showingImg_name_class;
     imgObj.src=url;
     imgObj.onload=function(){
         UM_showingImg_dom.appendChild(imgObj);
-        if(_ifDom('.'+UM_showingImg_name_class) && _ifDom(asDomName)){
+        if(_ifDom('.'+UM_showingImg_name_class)){
             _('.'+UM_showingImg_name_class, 0).transition('.2s ease').css({opacity:0});
             _('.'+UM_showingImg_name_class, 0).center();
             let UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
@@ -481,9 +485,22 @@ function _showingImg(asDomName, url, string){                       //按比例�
                 _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('height'))*.98*UM_showingImg_w/UM_showingImg_h+'px', height:parseInt(UM_showingImg_um.getStyle('height'))*.98+'px', opacity:1});
             }
         }
-    }
-};
 
-//_showingImg(asDomName, url, string)    //asDomName:  容器选择器   _('.xxxx', 0)
-                          //url: 图片地址
-                          //string:   如果同一页面有多个该插件, 则可以添加第三个参数区分开生成的图片的className
+        _(window).BD('resize', function(){
+            if(window[_timerName])clearTimeout(window[_timerName]);
+            window[_timerName]=setTimeout(function(){
+                if(_ifDom('.'+UM_showingImg_name_class)){
+                    _('.'+UM_showingImg_name_class, 0).center();
+                    let UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
+                    let UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
+                    if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))<UM_showingImg_w/UM_showingImg_h){
+                        _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('width'))*.98+'px', height:parseInt(UM_showingImg_um.getStyle('width'))*.98*UM_showingImg_h/UM_showingImg_w+'px', opacity:1});
+                    }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
+                        _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('height'))*.98*UM_showingImg_w/UM_showingImg_h+'px', height:parseInt(UM_showingImg_um.getStyle('height'))*.98+'px', opacity:1});
+                    }
+                    if(window[_timerName])window[_timerName]=null;
+                }
+            }, 500);
+        });
+    };
+};
