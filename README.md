@@ -27,7 +27,7 @@ _MovingScroll({　　　//　滚动条插件    参数：json
 });
 ```
 基础效果 :</br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_MovingScroll.gif)</br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_MovingScroll.gif)</br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -146,7 +146,7 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 });
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullDown.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_PullDown.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -202,7 +202,7 @@ _PullLeft({　　　//　左拉内容过渡插件  参数：json
 });
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_PullLeft.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_PullLeft.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -257,7 +257,7 @@ _Drag({　　　//　拖拽插件，参数:json
 ***注: 被拖拽主体元素的拖拽范围会被限制在 [用于定位它的元素] 的宽高范围内(通俗地说, 就是被拖拽主体的第一个有 position:absolute|relative|fixed; 属性的父元素)
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_Drag.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_Drag.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -313,7 +313,7 @@ _showInputImg({　　　//　按比例显示文本域图片插件
 ***注: 显示图片的容器的选择器(即imgBox)所选的元素必须设置 position:absolute|relative|fixed; 否则无法正确显示图片
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showInputImg.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_showInputImg.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -354,7 +354,7 @@ _showingImg(imgBox, url);
 ***注: 显示图片的容器的选择器(即imgBox)所选的元素必须设置 position:absolute|relative|fixed; 否则无法正确显示图片
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/custom-UM/blob/master/image/_showingImg.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_showingImg.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
@@ -380,15 +380,15 @@ _showingImg(imgBox, url);
 
 <script>
 btn1.onclick = function(){
-    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img1_showingImg.gif');
+    _showingImg(_(imgBox), 'https://github.com/ModernFarmer/Image/blob/master/img1_showingImg.gif');
 };
 
 btn2.onclick = function(){
-    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img2_showingImg.gif');
+    _showingImg(_(imgBox), 'https://github.com/ModernFarmer/Image/blob/master/img2_showingImg.gif');
 };
 
 btn3.onclick = function(){
-    _showingImg(_(imgBox), 'https://raw.githubusercontent.com/ModernFarmer/custom-UM/master/image/img3_showingImg.gif');
+    _showingImg(_(imgBox), 'https://github.com/ModernFarmer/Image/blob/master/img3_showingImg.gif');
 };
 </script>
 ```
