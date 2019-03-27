@@ -221,9 +221,13 @@ function _PullDown(obj){                           //下拉内容过渡插件
     });
     if(UM_PullDown.D_click===false){
         _(document).BD('click', function(){
-            if(UM_PullDown.within)UM_PullDown.within.css({height:'auto'});
-            UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
-            UM_PullDown.now=false;
+            if(UM_PullDown.down.el.style.height==='auto')UM_PullDown.down.css({height:UM_PullDown.down.getStyle('height')});
+            if(!UM_PullDown.within){
+                setTimeout(function(){
+                    UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
+                    UM_PullDown.now=false;
+                }, 1)
+            }
         });
     }
     if(UM_PullDown.select===false){
