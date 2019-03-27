@@ -137,8 +137,8 @@ _MovingScroll({
 ```javascript
 _PullDown({　　　//　下拉选择框插件  参数：json
     caption:_('.caption', 0),　　　//　标题选择器　　selector
-    down:_('.down', 0),　　　//　下拉内容选择器　　selector
-    within:null,　　　//　***嵌套的父元素选择器(即父嵌套插件的down参数)　　selector　[可选, 默认null]
+    down:_('.down', 0),　　　//　下拉内容选择器　　selector　　*!注 : 下拉内容选择器的每个选项元素(第一层子元素选项元素)都必须是一个元素节点
+    within:null,　　　//　***嵌套的父元素选择器(即父嵌套插件的down参数)　　selector　[可选, 默认null]  *!当存在父嵌套插件的时候, 必须要加within选项, 不然将无法正确完成插件功能
     speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
     now:false,　　　//　下拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
     select:false,　　　//　点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
@@ -156,8 +156,10 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     html, body {width:100%; height:100%; padding:0; margin:0;}
     #titleBtn {width:200px; height:40px; line-height:40px; text-align:center; cursor:pointer; border:1px solid #0000FF; border-radius:10px; position:absolute; left:20%; top:10%;}
     #contentBox {width:250px; border:1px solid #FF8000; border-radius:10px; position:absolute; left:20%; top:calc(10% + 50px);}
-    .listOpt {width:85%; height:30px; line-height:30px; border:1px solid gray; border-radius:5px; margin-left:5%; margin-top:5px;}
+    .listOpt {width:85%; line-height:30px; border:1px solid gray; border-radius:5px; margin-left:5%; margin-top:5px;}
     .listOpt_last {margin-bottom:5px;}
+    #childCaption {position:relative;}
+    .childList {width:85%; height:20px; font-size:12px; line-height:20px; border:1px solid #DFDFDF; border-radius:5px; margin-left:10%; margin-top:5px;}
 </style>
 
 <script src="UM-1.0.0.js"></script>
@@ -166,12 +168,19 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 <html>
 <body>
     <div id="titleBtn">_PullDown</div>　　　<!--标题div-->
-    <div id="contentBox">　　　<!--下拉内容div-->
+    <div id="contentBox">      <!--下拉内容div-->
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option1</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
-        <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option5</div>
+        <div class="listOpt" id="childCaption">&nbsp;&nbsp;&nbsp;&nbsp;option5 - 嵌套插件</div>
+        <div class="listOpt" id="childContent">
+            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption1</div>
+            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption2</div>
+            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption3</div>
+            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption4</div>
+            <div class="childList listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;childOption5</div>
+        </div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option6</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option7</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option8</div>
@@ -185,6 +194,13 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 _PullDown({
     caption:_(titleBtn),　　　//　标题选择器　　selector
     down:_(contentBox),　　　//　下拉内容选择器　　selector
+    speed:.5　　　//　速度(在几秒内完成过渡)
+});
+
+_PullDown({
+    caption:_(childCaption),　　　//　标题选择器　　selector
+    down:_(childContent),　　　//　下拉内容选择器　　selector
+    within:_(contentBox),　　　//　嵌套的父元素选择器　　selector
     speed:.5　　　//　速度(在几秒内完成过渡)
 });
 </script>
