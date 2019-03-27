@@ -152,6 +152,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
         select:obj.select || false,
         D_click:obj.D_click || false,
         choosable:obj.choosable || false,
+        within:obj.within || null,
         getStyleInf:function(dom, typeName){
             if(window.getComputedStyle){
                 return parseInt(getComputedStyle(dom,false)[typeName]);
@@ -191,12 +192,26 @@ function _PullDown(obj){                           //下拉内容过渡插件
     UM_PullDown.caption.css({cursor:'pointer'});
     UM_PullDown.caption.BD('click', function(event){
         _stopPropagation(event);
-        if(UM_PullDown.now===false){
-            UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:1, height:UM_PullDown.height(), paddingTop:top_p, paddingBottom:bottom_p, marginTop:top_m, marginBottom:bottom_m});
+        if(UM_PullDown.down.el.style.height!=='auto'){
+            if(UM_PullDown.within)UM_PullDown.within.css({height:'auto'});
+            if(UM_PullDown.now===false){
+                UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:1, height:UM_PullDown.height(), paddingTop:top_p, paddingBottom:bottom_p, marginTop:top_m, marginBottom:bottom_m});
+            }else{
+                UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
+            };
+            UM_PullDown.now=!UM_PullDown.now;
         }else{
-            UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
+            UM_PullDown.down.css({height:UM_PullDown.down.getStyle('height')});
+            setTimeout(function(){
+                if(UM_PullDown.within)UM_PullDown.within.css({height:'auto'});
+                if(UM_PullDown.now===false){
+                    UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:1, height:UM_PullDown.height(), paddingTop:top_p, paddingBottom:bottom_p, marginTop:top_m, marginBottom:bottom_m});
+                }else{
+                    UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
+                };
+                UM_PullDown.now=!UM_PullDown.now;
+            }, 1);
         };
-        UM_PullDown.now=!UM_PullDown.now;
     });
     _(window).BD('resize', function(){
         if(UM_PullDown.caption.el){
@@ -206,6 +221,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
     });
     if(UM_PullDown.D_click===false){
         _(document).BD('click', function(){
+            if(UM_PullDown.within)UM_PullDown.within.css({height:'auto'});
             UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
             UM_PullDown.now=false;
         });
@@ -213,6 +229,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
     if(UM_PullDown.select===false){
         UM_PullDown.down.BD('click', function(event){
             _stopPropagation(event);
+            if(UM_PullDown.within)UM_PullDown.within.css({height:'auto'});
             UM_PullDown.down.transition(UM_PullDown.speed+'s linear').transformOrigin('CENTER TOP').css({opacity:0, height:0, paddingTop:0, paddingBottom:0, marginTop:0, marginBottom:0});
             UM_PullDown.now=false;
         });
