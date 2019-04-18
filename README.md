@@ -141,6 +141,7 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     within:null,　　　//　***嵌套的父元素选择器(即父嵌套插件的down参数)　　selector　[可选, 默认null]  *!当存在父嵌套插件的时候, 必须要加within选项, 不然将无法正确完成插件功能
     speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
     now:false,　　　//　下拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
+    maxHeight:'500px',　　　//　设置下拉内容的最大高度,如果超出高度则自动产生滚动条　　string　[可选, 默认null]　　(cunston-UM-1.1.0新增)
     select:false,　　　//　点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
     D_click:false,　　　//　点击背景是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选，默认false]
     choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
