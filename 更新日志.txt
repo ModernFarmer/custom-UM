@@ -1,2 +1,5 @@
 1.0.0
         custom-UM首发
+
+1.1.0
+        _PullDown()方法新增maxHeight参数
