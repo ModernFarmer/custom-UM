@@ -466,7 +466,6 @@ function _showInputImg(json){                       //显示文本域表单所�
     let _str=''+Math.random();
     _str=_str.split('.')[1];
     let UM_ShowInputImg_className='custom_UM_showInputImg_classname_'+_str;
-    let _castom=true;
     let _timerName='timer_'+UM_ShowInputImg_className;
 
     UM_ShowInputImg.frame.BD('change', function(){
