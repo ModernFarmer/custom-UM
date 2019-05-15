@@ -1,5 +1,5 @@
 function _MovingScroll(obj){                          //滚动条插件
-    let UM_MovingScroll={
+    var UM_MovingScroll={
         box:obj.box,
         contentBox:obj.contentBox,
         scrollBox:obj.scrollBox,
@@ -25,19 +25,19 @@ function _MovingScroll(obj){                          //滚动条插件
     },500);        
     UM_MovingScroll.box.mousewheel(function(){
         _stopPropagation(event);
-        let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
+        var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
         if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
         if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
         UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-        let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+        var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
         UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
     }, function(){
         _stopPropagation(event);
-        let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) - UM_MovingScroll.speed;
+        var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) - UM_MovingScroll.speed;
         if(top_contentBox<-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box()))top_contentBox=-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box());
         if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
         UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-        let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+        var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
         UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
     });
 
@@ -47,7 +47,7 @@ function _MovingScroll(obj){                          //滚动条插件
         UM_MovingScroll.scrollBox.transition('1s ease-out').css({opacity:.3});
     }).BD('click', function(){                                    //默认当点击容器盒子时，执行滚动条盒子的高度自动变化
         setTimeout(function(){
-            let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top'));
+            var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top'));
             if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box()){
                 top_contentBox=0;
             }else if(top_contentBox<-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())){
@@ -55,7 +55,7 @@ function _MovingScroll(obj){                          //滚动条插件
             }
             if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
             UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-            let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+            var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
             UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
         }, 500);
     });
@@ -63,7 +63,7 @@ function _MovingScroll(obj){                          //滚动条插件
     if(UM_MovingScroll.watch_keyup===true){                  //当页面上按键抬起时，是否执行滚动条盒子的高度自动变化，根据需要添加该选项
         _(document).BD('keyup', function(){
             setTimeout(function() {
-                let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
+                var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
                 if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box()){
                     top_contentBox=0;
                 }else if(top_contentBox<-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())){
@@ -71,7 +71,7 @@ function _MovingScroll(obj){                          //滚动条插件
                 }
                 if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
                 UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-                let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+                var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
                 UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
             }, 500);
         });
@@ -79,7 +79,7 @@ function _MovingScroll(obj){                          //滚动条插件
     if(UM_MovingScroll.watch_mouseup===true){                  //当页面上鼠标抬起时，是否执行滚动条盒子的高度自动变化，根据需要添加该选项
         _(document).BD('mouseup', function(){
             setTimeout(function() {
-                let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
+                var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
                 if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box()){
                     top_contentBox=0;
                 }else if(top_contentBox<-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())){
@@ -87,7 +87,7 @@ function _MovingScroll(obj){                          //滚动条插件
                 }
                 if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
                 UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-                let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+                var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
                 UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
             }, 500);
         });
@@ -95,7 +95,7 @@ function _MovingScroll(obj){                          //滚动条插件
     if(UM_MovingScroll.watch_el){
         UM_MovingScroll.watch_el.el.BD('click', function(){
             setTimeout(function() {
-                let top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
+                var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
                 if(top_contentBox>0 || UM_MovingScroll.height_content()<UM_MovingScroll.height_box()){
                     top_contentBox=0;
                 }else if(top_contentBox<-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())){
@@ -103,7 +103,7 @@ function _MovingScroll(obj){                          //滚动条插件
                 }
                 if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())top_contentBox=0;
                 UM_MovingScroll.contentBox.transition('.1s ease-out').css({top:top_contentBox+'px'});
-                let top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
+                var top_scrollBox=-Math.ceil(top_contentBox / (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()) * (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()));
                 UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'top':top_scrollBox+'px'});
             }, UM_MovingScroll.watch_el.timeout);
         });
@@ -111,28 +111,28 @@ function _MovingScroll(obj){                          //滚动条插件
     UM_MovingScroll.scrollBox.BD('mousedown', function(event){
         _stopPropagation(event);
         _preventDefault(event);
-        let cursor_original=_scrollDistance().y+event.clientY;
-        let L=cursor_original-parseInt(UM_MovingScroll.scrollBox.getStyle('top'));
-        let ___runner=function(event){
-            let cursor=_scrollDistance().y+event.clientY;
-            let s=cursor-L;
+        var cursor_original=_scrollDistance().y+event.clientY;
+        var L=cursor_original-parseInt(UM_MovingScroll.scrollBox.getStyle('top'));
+        var ___runner=function(event){
+            var cursor=_scrollDistance().y+event.clientY;
+            var s=cursor-L;
             if(s<0)s=0;
             if(s>parseInt(UM_MovingScroll.box.getStyle('height'))-parseInt(UM_MovingScroll.scrollBox.getStyle('height')))s=parseInt(UM_MovingScroll.box.getStyle('height'))-parseInt(UM_MovingScroll.scrollBox.getStyle('height'));
-            let S=-Math.floor(s / (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()) * (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()));
+            var S=-Math.floor(s / (UM_MovingScroll.height_box() - UM_MovingScroll.height_scroll()) * (UM_MovingScroll.height_content() - UM_MovingScroll.height_box()));
             UM_MovingScroll.scrollBox.transition('').css({top:s+'px'});
             UM_MovingScroll.contentBox.transition('').css({top:S+'px'});
         };
-        let ___stopRun=function(){
+        var ___stopRun=function(){
             _(document).unBD('mousemove', ___runner).unBD('mouseup', ___stopRun);
         };
         _(document).BD('mousemove', ___runner);
         _(document).BD('mouseup', ___stopRun);
     });
     if(_isArray(UM_MovingScroll.position) && UM_MovingScroll.position.length>0){
-        for(let i=0; i<UM_MovingScroll.position.length; i++){
+        for(var i=0; i<UM_MovingScroll.position.length; i++){
             UM_MovingScroll.position[i].clickObj.el.setAttribute('UM_MovingScrollPlugIn', i);
             UM_MovingScroll.position[i].clickObj.BD('click', function(){
-                let mark= UM_MovingScroll.position[this.getAttribute('UM_MovingScrollPlugIn')].targetObj.el.offsetTop>(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())?-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box()):-(UM_MovingScroll.position[this.getAttribute('UM_MovingScrollPlugIn')].targetObj.el.offsetTop);
+                var mark= UM_MovingScroll.position[this.getAttribute('UM_MovingScrollPlugIn')].targetObj.el.offsetTop>(UM_MovingScroll.height_content()-UM_MovingScroll.height_box())?-(UM_MovingScroll.height_content()-UM_MovingScroll.height_box()):-(UM_MovingScroll.position[this.getAttribute('UM_MovingScrollPlugIn')].targetObj.el.offsetTop);
                 if(UM_MovingScroll.height_content()<UM_MovingScroll.height_box())mark=0;
                 UM_MovingScroll.contentBox.transition('.5s ease-out').css({top:mark+'px'});
                 UM_MovingScroll.scrollBox.transition('.5s ease-out').css({top:Math.ceil(-mark*UM_MovingScroll.height_scroll()/UM_MovingScroll.height_box())+'px'});
@@ -144,7 +144,7 @@ function _MovingScroll(obj){                          //滚动条插件
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _PullDown(obj){                           //下拉内容过渡插件
-    let UM_PullDown={
+    var UM_PullDown={
         caption:obj.caption,
         down:obj.down,
         speed:obj.speed || 0.5,
@@ -162,8 +162,8 @@ function _PullDown(obj){                           //下拉内容过渡插件
             };
         },
         height:function(){
-            let result=0;
-            for(let i=0; i<UM_PullDown.down.el.children.length; i++){
+            var result=0;
+            for(var i=0; i<UM_PullDown.down.el.children.length; i++){
                 result=result+UM_PullDown.down.el.children[i].offsetHeight+UM_PullDown.getStyleInf(UM_PullDown.down.el.children[i], 'marginTop')+UM_PullDown.getStyleInf(UM_PullDown.down.el.children[i], 'marginBottom');
             };
             return result+'px';
@@ -182,10 +182,10 @@ function _PullDown(obj){                           //下拉内容过渡插件
         }
     };
 
-    let top_p=UM_PullDown.padding_top();
-    let bottom_p=UM_PullDown.padding_bottom();
-    let top_m=UM_PullDown.margin_top();
-    let bottom_m=UM_PullDown.margin_bottom();
+    var top_p=UM_PullDown.padding_top();
+    var bottom_p=UM_PullDown.padding_bottom();
+    var top_m=UM_PullDown.margin_top();
+    var bottom_m=UM_PullDown.margin_bottom();
 
     if(UM_PullDown.now===true){
         if(UM_PullDown.maxHeight && UM_PullDown.maxHeight.replace(/\s/g, '')!=''){
@@ -288,7 +288,7 @@ function _PullDown(obj){                           //下拉内容过渡插件
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _PullLeft(obj){                           //左拉内容过渡插件
-    let UM_PullLeft={
+    var UM_PullLeft={
         caption:obj.caption,
         left:obj.left,
         speed:obj.speed || 0.5,
@@ -304,8 +304,8 @@ function _PullLeft(obj){                           //左拉内容过渡插件
             };
         },
         width:function(){
-            let result=0;
-            for(let i=0; i<UM_PullLeft.left.el.children.length; i++){
+            var result=0;
+            for(var i=0; i<UM_PullLeft.left.el.children.length; i++){
                 result=result+UM_PullLeft.left.el.children[i].offsetWidth+UM_PullLeft.getStyleInf(UM_PullLeft.left.el.children[i], 'marginLeft')+UM_PullLeft.getStyleInf(UM_PullLeft.left.el.children[i], 'marginRight');
             };
             return result+'px';
@@ -323,10 +323,10 @@ function _PullLeft(obj){                           //左拉内容过渡插件
             return this.left.getStyle('marginRight');
         }
     };
-    let left_p=UM_PullLeft.padding_left();
-    let right_p=UM_PullLeft.padding_right();
-    let left_m=UM_PullLeft.margin_left();
-    let right_m=UM_PullLeft.margin_right();
+    var left_p=UM_PullLeft.padding_left();
+    var right_p=UM_PullLeft.padding_right();
+    var left_m=UM_PullLeft.margin_left();
+    var right_m=UM_PullLeft.margin_right();
     if(UM_PullLeft.now===true)UM_PullLeft.left.css({opacity:1, width:UM_PullLeft.width(), overflow:'hidden'});
     if(UM_PullLeft.now===false)UM_PullLeft.left.css({opacity:0, width:0, paddingLeft:0, paddingRight:0, marginLeft:0, marginRight:0, overflow:'hidden'});
     if(UM_PullLeft.choosable===false)UM_PullLeft.caption.choosable(false);
@@ -364,7 +364,7 @@ function _PullLeft(obj){                           //左拉内容过渡插件
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _Drag(obj){                        //拖拽插件
-    let UM_Drag={
+    var UM_Drag={
         mousedownBox:obj.mousedownBox,
         dragBox:obj.dragBox || obj.mousedownBox,
         axis:obj.axis || false
@@ -372,16 +372,16 @@ function _Drag(obj){                        //拖拽插件
 
     UM_Drag.dragBox.choosable();
 
-    let _parent=UM_Drag.dragBox.el.offsetParent;
+    var _parent=UM_Drag.dragBox.el.offsetParent;
 
     if(UM_Drag.axis && UM_Drag.axis=='x'){
         UM_Drag.mousedownBox.BD('mousedown', function(event){
             _stopPropagation(event);
-            let Drag_S_left=_scrollDistance().x+event.clientX-UM_Drag.dragBox.el.offsetLeft;
+            var Drag_S_left=_scrollDistance().x+event.clientX-UM_Drag.dragBox.el.offsetLeft;
 
-            let _mousemove=function(event){
+            var _mousemove=function(event){
                 _preventDefault(event);
-                let Drag_left=_scrollDistance().x+event.clientX-Drag_S_left;
+                var Drag_left=_scrollDistance().x+event.clientX-Drag_S_left;
                 if(Drag_left<0){
                     Drag_left=0;
                 }else if(Drag_left>(_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
@@ -390,7 +390,7 @@ function _Drag(obj){                        //拖拽插件
                 UM_Drag.dragBox.el.style.left=Drag_left+'px';
             };
 
-            let _mouseup=function(){
+            var _mouseup=function(){
                 _(document).unBD('mousemove', _mousemove).unBD('mouseup', _mouseup);
             };
 
@@ -400,11 +400,11 @@ function _Drag(obj){                        //拖拽插件
     }else if(UM_Drag.axis && UM_Drag.axis=='y'){
         UM_Drag.mousedownBox.BD('mousedown', function(event){
             _stopPropagation(event);
-            let Drag_S_top=_scrollDistance().y+event.clientY-UM_Drag.dragBox.el.offsetTop;
+            var Drag_S_top=_scrollDistance().y+event.clientY-UM_Drag.dragBox.el.offsetTop;
 
-            let _mousemove=function(event){
+            var _mousemove=function(event){
                 _preventDefault(event);
-                let Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
+                var Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
                 if(Drag_top<0){
                     Drag_top=0;
                 }else if(Drag_top>(_parent.offsetHeight-UM_Drag.dragBox.el.offsetHeight)){
@@ -413,7 +413,7 @@ function _Drag(obj){                        //拖拽插件
                 UM_Drag.dragBox.el.style.top=Drag_top+'px';
             };
 
-            let _mouseup=function(){
+            var _mouseup=function(){
                 _(document).unBD('mousemove', _mousemove).unBD('mouseup', _mouseup);
             };
 
@@ -423,13 +423,13 @@ function _Drag(obj){                        //拖拽插件
     }else{
         UM_Drag.mousedownBox.BD('mousedown', function(event){
             _stopPropagation(event);
-            let Drag_S_left=_scrollDistance().x+event.clientX-UM_Drag.dragBox.el.offsetLeft;
-            let Drag_S_top=_scrollDistance().y+event.clientY-UM_Drag.dragBox.el.offsetTop;
+            var Drag_S_left=_scrollDistance().x+event.clientX-UM_Drag.dragBox.el.offsetLeft;
+            var Drag_S_top=_scrollDistance().y+event.clientY-UM_Drag.dragBox.el.offsetTop;
 
-            let _mousemove=function(event){
+            var _mousemove=function(event){
                 _preventDefault(event);
-                let Drag_left=_scrollDistance().x+event.clientX-Drag_S_left;
-                let Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
+                var Drag_left=_scrollDistance().x+event.clientX-Drag_S_left;
+                var Drag_top=_scrollDistance().y+event.clientY-Drag_S_top;
                 if(Drag_left<0){
                     Drag_left=0;
                 }else if(Drag_left>(_parent.offsetWidth-UM_Drag.dragBox.el.offsetWidth)){
@@ -444,7 +444,7 @@ function _Drag(obj){                        //拖拽插件
                 UM_Drag.dragBox.el.style.top=Drag_top+'px';
             };
 
-            let _mouseup=function(){
+            var _mouseup=function(){
                 _(document).unBD('mousemove', _mousemove).unBD('mouseup', _mouseup);
             };
 
@@ -457,22 +457,22 @@ function _Drag(obj){                        //拖拽插件
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _showInputImg(json){                       //显示文本域表单所选择的图片到指定的元素上
-    let UM_ShowInputImg={
+    var UM_ShowInputImg={
         frame:json.frame,
         imgBox:json.imgBox,
         isNotImg:json.isNotImg || null
     };
 
-    let _str=''+Math.random();
+    var _str=''+Math.random();
     _str=_str.split('.')[1];
-    let UM_ShowInputImg_className='custom_UM_showInputImg_classname_'+_str;
-    let _timerName='timer_'+UM_ShowInputImg_className;
+    var UM_ShowInputImg_className='custom_UM_showInputImg_classname_'+_str;
+    var _timerName='timer_'+UM_ShowInputImg_className;
 
     UM_ShowInputImg.frame.BD('change', function(){
         UM_ShowInputImg.imgBox.el.innerHTML='';
-        let file=UM_ShowInputImg.frame.el.files;
+        var file=UM_ShowInputImg.frame.el.files;
         if(!file[0])return;
-        let imgObj=new Image();
+        var imgObj=new Image();
         imgObj.className=UM_ShowInputImg_className;               
         if(!_isImg(UM_ShowInputImg.frame.el)){      //判断所选文件是否为图片文件
             if(UM_ShowInputImg.isNotImg){
@@ -480,7 +480,7 @@ function _showInputImg(json){                       //显示文本域表单所�
             }
             return;
         };
-        let UM_ShowInputImg_url=null;
+        var UM_ShowInputImg_url=null;
         if(window.createObjectURL!=undefined){
             UM_ShowInputImg_url=window.createObjectURL(file[0]);          //basic
         }else if(window.URL!=undefined){
@@ -495,8 +495,8 @@ function _showInputImg(json){                       //显示文本域表单所�
             if(_ifDom('.'+UM_ShowInputImg_className)){
                 _('.'+UM_ShowInputImg_className, 0).transition('.2s ease').css({opacity:0});
                 _('.'+UM_ShowInputImg_className, 0).center();
-                let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
-                let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
+                var w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
+                var h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
                 if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
                     _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
                 }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
@@ -509,8 +509,8 @@ function _showInputImg(json){                       //显示文本域表单所�
                 window[_timerName]=setTimeout(function(){
                     if(_ifDom('.'+UM_ShowInputImg_className)){
                         _('.'+UM_ShowInputImg_className, 0).center();
-                        let w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
-                        let h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
+                        var w=_('.'+UM_ShowInputImg_className, 0).el.offsetWidth;
+                        var h=_('.'+UM_ShowInputImg_className, 0).el.offsetHeight;
                         if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))<w/h){
                             _('.'+UM_ShowInputImg_className, 0).css({width:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98+'px', height:parseInt(UM_ShowInputImg.imgBox.getStyle('width'))*.98*h/w+'px', opacity:1});
                         }else if(parseInt(UM_ShowInputImg.imgBox.getStyle('width'))/parseInt(UM_ShowInputImg.imgBox.getStyle('height'))>=w/h){
@@ -527,14 +527,14 @@ function _showInputImg(json){                       //显示文本域表单所�
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function _showingImg(_selector, url){                       //按比例显示图片
-    let UM_showingImg_um=_selector;
-    let UM_showingImg_dom=_selector.el;
-    let UM_showingImg_str=''+Math.random();
+    var UM_showingImg_um=_selector;
+    var UM_showingImg_dom=_selector.el;
+    var UM_showingImg_str=''+Math.random();
     UM_showingImg_str=UM_showingImg_str.split('.')[1];
-    let UM_showingImg_name_class='custom_UM_showingImg_classname_'+UM_showingImg_str;
-    let _timerName='timer_'+UM_showingImg_name_class;
+    var UM_showingImg_name_class='custom_UM_showingImg_classname_'+UM_showingImg_str;
+    var _timerName='timer_'+UM_showingImg_name_class;
     UM_showingImg_dom.innerHTML='';
-    let imgObj=new Image();
+    var imgObj=new Image();
     imgObj.className=UM_showingImg_name_class;
     imgObj.src=url;
     imgObj.onload=function(){
@@ -542,8 +542,8 @@ function _showingImg(_selector, url){                       //按比例显示图
         if(_ifDom('.'+UM_showingImg_name_class)){
             _('.'+UM_showingImg_name_class, 0).transition('.2s ease').css({opacity:0});
             _('.'+UM_showingImg_name_class, 0).center();
-            let UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
-            let UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
+            var UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
+            var UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
             if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))<UM_showingImg_w/UM_showingImg_h){
                 _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('width'))*.98+'px', height:parseInt(UM_showingImg_um.getStyle('width'))*.98*UM_showingImg_h/UM_showingImg_w+'px', opacity:1});
             }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
@@ -556,8 +556,8 @@ function _showingImg(_selector, url){                       //按比例显示图
             window[_timerName]=setTimeout(function(){
                 if(_ifDom('.'+UM_showingImg_name_class)){
                     _('.'+UM_showingImg_name_class, 0).center();
-                    let UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
-                    let UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
+                    var UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
+                    var UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
                     if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))<UM_showingImg_w/UM_showingImg_h){
                         _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('width'))*.98+'px', height:parseInt(UM_showingImg_um.getStyle('width'))*.98*UM_showingImg_h/UM_showingImg_w+'px', opacity:1});
                     }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
