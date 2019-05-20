@@ -22,7 +22,7 @@ function _MovingScroll(obj){                          //滚动条插件
     UM_MovingScroll.contentBox.transition('.5s ease-out');
     setTimeout(function(){
         UM_MovingScroll.scrollBox.transition('.5s ease-out').css({'height':UM_MovingScroll.height_scroll()+'px', 'cursor':'pointer'});       //初始化滚动条高度，必要时需要加定时器
-    },500);        
+    },500);
     UM_MovingScroll.box.mousewheel(function(){
         _stopPropagation(event);
         var top_contentBox=parseInt(UM_MovingScroll.contentBox.getStyle('top')) + UM_MovingScroll.speed;
@@ -466,6 +466,7 @@ function _showInputImg(json){                       //显示文本域表单所�
     var _str=''+Math.random();
     _str=_str.split('.')[1];
     var UM_ShowInputImg_className='custom_UM_showInputImg_classname_'+_str;
+    var _castom=true;
     var _timerName='timer_'+UM_ShowInputImg_className;
 
     UM_ShowInputImg.frame.BD('change', function(){
@@ -532,24 +533,31 @@ function _showingImg(_selector, url){                       //按比例显示图
     var UM_showingImg_str=''+Math.random();
     UM_showingImg_str=UM_showingImg_str.split('.')[1];
     var UM_showingImg_name_class='custom_UM_showingImg_classname_'+UM_showingImg_str;
+    var _timerName_interval='timerInterval_'+UM_showingImg_name_class;
     var _timerName='timer_'+UM_showingImg_name_class;
+    UM_showingImg_um.css({overflow:'hidden'});
     UM_showingImg_dom.innerHTML='';
     var imgObj=new Image();
     imgObj.className=UM_showingImg_name_class;
     imgObj.src=url;
     imgObj.onload=function(){
         UM_showingImg_dom.appendChild(imgObj);
-        if(_ifDom('.'+UM_showingImg_name_class)){
-            _('.'+UM_showingImg_name_class, 0).transition('.2s ease').css({opacity:0});
-            _('.'+UM_showingImg_name_class, 0).center();
-            var UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
-            var UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
-            if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))<UM_showingImg_w/UM_showingImg_h){
-                _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('width'))*.98+'px', height:parseInt(UM_showingImg_um.getStyle('width'))*.98*UM_showingImg_h/UM_showingImg_w+'px', opacity:1});
-            }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
-                _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('height'))*.98*UM_showingImg_w/UM_showingImg_h+'px', height:parseInt(UM_showingImg_um.getStyle('height'))*.98+'px', opacity:1});
+        window[_timerName_interval]=setInterval(function(){
+            if(_ifDom('.'+UM_showingImg_name_class)){
+                _('.'+UM_showingImg_name_class, 0).transition('none').css({opacity:0}).center();
+                var UM_showingImg_w=_('.'+UM_showingImg_name_class, 0).el.offsetWidth;
+                var UM_showingImg_h=_('.'+UM_showingImg_name_class, 0).el.offsetHeight;
+                if(UM_showingImg_w>0){
+                    if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))<UM_showingImg_w/UM_showingImg_h){
+                        _('.'+UM_showingImg_name_class, 0).transition('.2s ease').css({width:parseInt(UM_showingImg_um.getStyle('width'))*.98+'px', height:parseInt(UM_showingImg_um.getStyle('width'))*.98*UM_showingImg_h/UM_showingImg_w+'px', opacity:1});
+                    }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
+                        _('.'+UM_showingImg_name_class, 0).transition('.2s ease').css({width:parseInt(UM_showingImg_um.getStyle('height'))*.98*UM_showingImg_w/UM_showingImg_h+'px', height:parseInt(UM_showingImg_um.getStyle('height'))*.98+'px', opacity:1});
+                    }
+                    clearInterval(window[_timerName_interval]);
+                    delete window[_timerName_interval];
+                }
             }
-        }
+        });
 
         _(window).BD('resize', function(){
             if(window[_timerName])clearTimeout(window[_timerName]);
@@ -563,7 +571,7 @@ function _showingImg(_selector, url){                       //按比例显示图
                     }else if(parseInt(UM_showingImg_um.getStyle('width'))/parseInt(UM_showingImg_um.getStyle('height'))>=UM_showingImg_w/UM_showingImg_h){
                         _('.'+UM_showingImg_name_class, 0).css({width:parseInt(UM_showingImg_um.getStyle('height'))*.98*UM_showingImg_w/UM_showingImg_h+'px', height:parseInt(UM_showingImg_um.getStyle('height'))*.98+'px', opacity:1});
                     }
-                    if(window[_timerName])window[_timerName]=null;
+                    delete window[_timerName];
                 }
             }, 500);
         });
