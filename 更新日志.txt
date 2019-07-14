@@ -3,3 +3,7 @@
 
 1.1.0
         _PullDown()方法新增maxHeight参数
+
+1.1.1
+        _MovingScroll()方法修改了参数中含有watch_keyup|watch_mouseup|watch_el选项时, 滚动条会自动向上滚动的bug
+        
