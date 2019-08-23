@@ -148,6 +148,7 @@ _PullDown({　　　//　下拉选择框插件  参数：json
 });
 
 ***注释: 如果这个_PullDown()插件(插件A)的caption元素是另一个_PullDown()插件(插件B)的down元素, 那么插件B即为父嵌套插件, 插件A即为子嵌套插件.
+**!注意: 从custom-UM-1.1.2开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
 ```
 基础效果 :</br></br>
 ![image](https://github.com/ModernFarmer/Image/blob/master/_PullDown.gif)</br></br>
@@ -161,6 +162,12 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     .listOpt_last {margin-bottom:5px;}
     #childCaption {position:relative;}
     .childList {width:85%; height:20px; font-size:12px; line-height:20px; border:1px solid #DFDFDF; border-radius:5px; margin-left:10%; margin-top:5px;}
+    
+	#btn1 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:20%;}
+	#btn2 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 35px);}
+	#btn3 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 70px);}
+	#btn4 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 105px);}
+	#btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover {background:#71BEE8; color:white;}
 </style>
 
 <script src="UM-1.0.0.js"></script>
@@ -188,22 +195,44 @@ _PullDown({　　　//　下拉选择框插件  参数：json
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option9</div>
         <div class="listOpt listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;option10</div>
     </div>
+    
+    <div id="btn1">展开父插件</div>
+    <div id="btn2">折叠父插件</div>
+    <div id="btn3">展开子插件</div>
+    <div id="btn4">折叠子插件</div>
 </body>
 </html>
 
 <script>
-_PullDown({
+let obj_parent=_PullDown({
     caption:_(titleBtn),　　　//　标题选择器　　selector
     down:_(contentBox),　　　//　下拉内容选择器　　selector
     speed:.5　　　//　速度(在几秒内完成过渡)
 });
 
-_PullDown({
+let obj_child=_PullDown({
     caption:_(childCaption),　　　//　标题选择器　　selector
     down:_(childContent),　　　//　下拉内容选择器　　selector
     within:_(contentBox),　　　//　嵌套的父元素选择器　　selector
     speed:.5　　　//　速度(在几秒内完成过渡)
 });
+
+btn1.onclick=function(){
+	_stopPropagation(event);  // 阻止事件冒泡
+	obj_parent.unfold(); // 展开父插件  **! 插件对象上的unfold()方法用法
+};
+btn2.onclick=function(){
+	_stopPropagation(event);  // 阻止事件冒泡
+	obj_parent.fold(); // 折叠父插件  **! 插件对象上的fold()方法用法
+};
+btn3.onclick=function(){
+	_stopPropagation(event);  // 阻止事件冒泡
+	obj_child.unfold(); // 展开子插件
+};
+btn4.onclick=function(){
+	_stopPropagation(event);  // 阻止事件冒泡
+	obj_child.fold(); // 折叠子插件
+};
 </script>
 ```
 # _PullLeft()
