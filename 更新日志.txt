@@ -7,3 +7,4 @@
 1.1.1
         _MovingScroll()方法修改了参数中含有watch_keyup|watch_mouseup|watch_el选项时, 滚动条会自动向上滚动的bug
         
+1.1.2   优化了_PullDown()方法, 使之成为一个对象, 并增加该对象的.unfold()方法和.fold()方法, 控制展开或者折叠下拉框, 删除了_PullDown()的maxHeight参         数, 可以直接css设置max-height属性
