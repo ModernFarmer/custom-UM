@@ -398,8 +398,8 @@ _showInputImg({
 ```javascript
 _showingImg(imgBox, url);
 
-    //参数 :  imgBox :       图片容器选择器　　selector
-              url :          图片路径　　path
+    参数 :  imgBox :       图片容器选择器　　selector
+            url :          图片路径　　path
 ***注: 显示图片的容器的选择器(即imgBox)所选的元素必须设置 position:absolute|relative|fixed; 否则无法正确显示图片
 ```
 基础效果 :</br></br>
@@ -448,9 +448,9 @@ btn3.onclick = function(){
 ```javascript
 _clickCopy(entry, target, method);
 
-    //参数 :  entry :       被点击的元素　　         selector
-              target :      被拷贝内容的元素[可选]　　selector  如果不写该参数则默认为和entry参数一样
-              method :      拷贝方法[可选]　　       ['textContent'|'innerHTML'|'outerHTML']   如果不写或者写错则默认为 'textContent'
+    参数 :  entry :       被点击的元素　　         selector
+            target :      被拷贝内容的元素[可选]　　selector  如果不写该参数则默认为和entry参数一样
+            method :      拷贝方法[可选]　　       ['textContent'|'innerHTML'|'outerHTML']   如果不写或者写错则默认为 'textContent'
               *注:* entry参数的元素绝对不能是<button></button>和<input type="button">, 因为这两个元素的点击事件只能追踪到 '有选中内容的复制'
 ```
 基础效果 :</br></br>
