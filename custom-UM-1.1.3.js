@@ -566,7 +566,7 @@ function _showingImg(_selector, url){                       //按比例显示图
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function _copyTextContent(entry, target, method){        // 点击拷贝元素内的内容
+function _clickCopy(entry, target, method){        // 点击拷贝元素内的内容
     var _target=target || entry, _method=method || 'textContent';
     _(entry, 0).BD('click', function(){
         document.execCommand('copy');
