@@ -163,11 +163,11 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     #childCaption {position:relative;}
     .childList {width:85%; height:20px; font-size:12px; line-height:20px; border:1px solid #DFDFDF; border-radius:5px; margin-left:10%; margin-top:5px;}
     
-	#btn1 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:20%;}
-	#btn2 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 35px);}
-	#btn3 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 70px);}
-	#btn4 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 105px);}
-	#btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover {background:#71BEE8; color:white;}
+    #btn1 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:20%;}
+    #btn2 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 35px);}
+    #btn3 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 70px);}
+    #btn4 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 105px);}
+    #btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover {background:#71BEE8; color:white;}
 </style>
 
 <script src="UM-1.0.0.js"></script>
@@ -218,20 +218,20 @@ let obj_child=_PullDown({
 });
 
 btn1.onclick=function(){
-	_stopPropagation(event);  // 阻止事件冒泡
-	obj_parent.unfold(); // 展开父插件  **! 插件对象上的unfold()方法用法
+    _stopPropagation(event);  // 阻止事件冒泡
+    obj_parent.unfold(); // 展开父插件  **! 插件对象上的unfold()方法用法
 };
 btn2.onclick=function(){
-	_stopPropagation(event);  // 阻止事件冒泡
-	obj_parent.fold(); // 折叠父插件  **! 插件对象上的fold()方法用法
+    _stopPropagation(event);  // 阻止事件冒泡
+    obj_parent.fold(); // 折叠父插件  **! 插件对象上的fold()方法用法
 };
 btn3.onclick=function(){
-	_stopPropagation(event);  // 阻止事件冒泡
-	obj_child.unfold(); // 展开子插件
+    _stopPropagation(event);  // 阻止事件冒泡
+    obj_child.unfold(); // 展开子插件
 };
 btn4.onclick=function(){
-	_stopPropagation(event);  // 阻止事件冒泡
-	obj_child.fold(); // 折叠子插件
+    _stopPropagation(event);  // 阻止事件冒泡
+    obj_child.fold(); // 折叠子插件
 };
 </script>
 ```
@@ -439,5 +439,52 @@ btn2.onclick = function(){
 btn3.onclick = function(){
     _showingImg(_(imgBox), 'https://github.com/ModernFarmer/Image/blob/master/img3_showingImg.gif');
 };
+</script>
+```
+# _clickCopy()
+　　　***`通过点击拷贝一个元素内的内容`***
+#
+基本用法API :
+```javascript
+_clickCopy(entry, target, method);
+
+    //参数 :  entry :       被点击的元素　　         selector
+              target :      被拷贝内容的元素[可选]　　selector  如果不写该参数则默认为和entry参数一样
+              method :      拷贝方法[可选]　　       ['textContent'|'innerHTML'|'outerHTML']   如果不写或者写错则默认为 'textContent'
+              *注:* entry参数的元素绝对不能是<button></button>和<input type="button">, 因为这两个元素的点击事件只能追踪到 '有选中内容的复制'
+```
+基础效果 :</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/_clickCopy.gif)</br></br>
+基础效果源代码 :
+```javascript
+<style>
+    #div1,#div2,#div3,#btn {width:200px; line-height:30px; text-align:center; border:1px solid gray; border-radius:5px; margin-top:30px; margin-left:100px; cursor:pointer; background:#FAFFEB;}
+    #div3 {cursor:default; background:white;}
+    #btn {color:#FFF8E4; background:#505050;}
+    .textDiv {width:500px; height:300px; resize:none; border-radius:5px; position:absolute; left:400px; top:30px;}
+</style>
+
+<script src="UM-1.0.0.js"></script>
+<script src="custom-UM-1.0.0.js"></script>
+
+<html>
+<body>
+    <div id="div1">Oh! How do you do!</div>
+    <div id="div2">
+        I'm good!
+        </br>
+        <span>Very good!</span>
+    </div>
+    <div id="div3">我是div3的文字</div>
+    <div id="btn">点我复制div3的文字</div>
+
+    <textarea class="textDiv"></textarea>
+</body>
+</html>
+
+<script>
+_clickCopy('#div1');
+_clickCopy(div2, div2, 'outerHTML');
+_clickCopy(btn, div3);
 </script>
 ```
