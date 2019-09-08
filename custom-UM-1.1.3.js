@@ -566,16 +566,16 @@ function _showingImg(_selector, url){                       //按比例显示图
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function _clickCopy(entry, target, method){        // 点击拷贝元素内的内容
+function _clickCopy(entry, target, method){
     var _target=target || entry, _method=method || 'textContent';
     _(entry, 0).BD('click', function(){
         document.execCommand('copy');
     }).BD('copy', function(event){
         if(_isIE()){
-            if(window.clipboardData)window.clipboardData.setData("Text", _(_target, 0).el[_method]);
+            if(window.clipboardData)window.clipboardData.setData("Text", _(_target, 0).el[_method].replace(/\s+/g, ' '));
         }else{
             event.preventDefault();
-            if(event.clipboardData)event.clipboardData.setData("text/plain", _(_target, 0).el[_method]);
+            if(event.clipboardData)event.clipboardData.setData("text/plain", _(_target, 0).el[_method].replace(/\s+/g, ' '));
         };
     });
 };
