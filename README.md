@@ -5,7 +5,7 @@
 基本用法API :
 ```javascript
 _MovingScroll({　　　//　滚动条插件    参数：json
-    box:_('.box', 0),                   //　容器盒子选择器　　selector　　容器盒子不能加任何border、padding和margin相关的任何样式，如有需要可在容器盒子再套一个div来添加样式
+    box:_('.box', 0),                   //　容器盒子选择器　　selector　　容器盒子不能加padding-top和padding-right样式，如有需要可在容器盒子再套一个div来添加样式
     contentBox:_('.content', 0),　　　//　滚动内容盒子选择器　　selector
     scrollBox:_('.scroll', 0),　　　//　滚动条盒子选择器　　selector
     speed:50,　　　//　滚动速度　　number
