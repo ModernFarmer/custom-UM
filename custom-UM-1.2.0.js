@@ -9,9 +9,6 @@ function ___constructor_MovingScroll(obj){                          //滚动条�
     this.scrollBox=_(obj.scrollBox, 0);
     this.speed=obj.speed || 150;
     this.position=obj.position || null;
-    this.watch_keyup=obj.watch_keyup || false;
-    this.watch_mouseup=obj.watch_mouseup || false;
-    this.watch_el=obj.watch_el || false;
 
     this.todo();
 };
