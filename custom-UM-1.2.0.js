@@ -148,7 +148,6 @@ function ___constructor_PullDown(obj){             //下拉内容过渡插件-�
 
     this.caption=_(obj.caption, 0);
     this.down=_(obj.down, 0);
-    this.speed=obj.speed || .5;
     this.speed=obj.speed && (obj.speed<.5 || obj.speed==.5)?obj.speed:.5;
     this.select=obj.select  || false;
     this.D_click=obj.D_click || false;
