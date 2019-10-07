@@ -8,7 +8,7 @@ function ___constructor_MovingScroll(obj){                          //滚动条�
     this.contentBox=_(obj.contentBox, 0);
     this.scrollBox=_(obj.scrollBox, 0);
     this.speed=obj.speed || 150;
-    this.position=obj.position || null;
+    this.navigation=obj.navigation || null;
 
     this.todo();
 };
@@ -91,15 +91,21 @@ ___constructor_MovingScroll.prototype.todo=function(){
         _(document).BD('mouseup', ___stopRun);
     }.bind(this));
 
-    if(_isArray(this.position) && this.position.length>0){  // 锚记导航, 根据需要添加该选项
-        for(var i=0; i<this.position.length; i++){
+    this.setNav(this.navigation);
+};
+
+___constructor_MovingScroll.prototype.setNav=function(Navigation){  // 可以手动修改锚记导航设置
+    Navigation=Navigation || null;
+    if(_isArray(Navigation) && Navigation.length>0){  // 锚记导航, 根据需要添加该选项
+        this.navigation=Navigation;
+        for(var i=0; i<Navigation.length; i++){
             (function(a){
-                _(this.position[a].clickSelector, 0).BD('click', function(){
+                _(Navigation[a].clickSelector, 0).BD('click', function(){
                     _stopPropagation(event);
                     var h_content=this._m_h_content();
                     var h_box=this._m_h_box();
                     if(h_content<h_box)return;
-                    var mark=_(this.position[a].targetSelector, 0).el.offsetTop>(h_content-h_box)?-(h_content-h_box):-(_(this.position[a].targetSelector, 0).el.offsetTop);
+                    var mark=_(Navigation[a].targetSelector, 0).el.offsetTop>(h_content-h_box)?-(h_content-h_box):-(_(Navigation[a].targetSelector, 0).el.offsetTop);
                     this.contentBox.transition('.5s ease-out').css({top:mark+'px'});
                     this.scrollBox.transition('.5s ease-out').css({top:-(this._m_h_scroll()*mark/h_box)+'px'});
                 }.bind(this)).BD('mouseup', function(){
@@ -109,7 +115,9 @@ ___constructor_MovingScroll.prototype.todo=function(){
                 });
             }.bind(this))(i);
         };
-    }
+    }else{
+        throw '参数错误: _MovingScroll().setNav(arg)的参数arg必须是一个长度大于0的数组!'
+    };
 };
 
 ___constructor_MovingScroll.prototype.adaptive=function(ms, condition){
