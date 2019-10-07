@@ -10,7 +10,7 @@ function ___constructor_MovingScroll(obj){                          //滚动条�
     this.speed=obj.speed || 150;
     this.navigation=obj.navigation || null;
 
-    this.todo();
+    this._m_todo();
 };
 
 ___constructor_MovingScroll.prototype._m_h_box=function(){
@@ -27,7 +27,7 @@ ___constructor_MovingScroll.prototype._m_h_scroll=function(){
     return h_content<=h_box?0:h_box*h_box/h_content;
 };
 
-___constructor_MovingScroll.prototype.todo=function(){
+___constructor_MovingScroll.prototype._m_todo=function(){
     this.contentBox.transition('.5s ease-out');
     setTimeout(function(){
         this.scrollBox.transition('.5s ease-out').css({'height':this._m_h_scroll()+'px', 'cursor':'pointer'});       //初始化滚动条高度，必要时需要加定时器
