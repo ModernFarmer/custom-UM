@@ -4,46 +4,49 @@
 #
 基本用法API :
 ```javascript
-_MovingScroll({　　　//　滚动条插件    参数：json
-    box:_('.box', 0),                   //　容器盒子选择器　　selector　　容器盒子不能加padding-top和padding-right样式，如有需要可在容器盒子再套一个div来添加样式
-    contentBox:_('.content', 0),　　　//　滚动内容盒子选择器　　selector
-    scrollBox:_('.scroll', 0),　　　//　滚动条盒子选择器　　selector
-    speed:50,　　　//　滚动速度　　number
-    position:[　　　//　锚记定位　　array　　*数组内是各个json对象[json, json, ...]，json内是{clickObj:锚记链接元素，targetObj:锚记书签元素}
-　　　　　　　　　　　//　可选项,  默认null
-        {clickObj:_('.c1', 0), targetObj:_('.t1', 0)},
-        {clickObj:_('.c2', 0), targetObj:_('.t2', 0)},
-        {clickObj:_('.c3', 0), targetObj:_('.t3', 0)},
-        {clickObj:_('.c4', 0), targetObj:_('.t4', 0)},
-        {clickObj:_('.c5', 0), targetObj:_('.t5', 0)},
+_MovingScroll({
+    box:'#box',　　　//　总容器元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为总容器元素
+    contentBox:'#contentBox',　　　//　内容容器元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为内容容器
+    scrollBox:'#scrollBox',　　　//　滚动条元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为滚动条元素
+    speed:150,    //  内容滚动速度  number  [可选, 默认150]  *注: 每次鼠标滚轮滚动时内容容器移动的距离, 单位为'px'
+    navigation:[　　　//　锚记定位　　array　[可选, 默认null]　*数组内是各个json对象[json, json, ...]，json内是{clickSelector:[string](锚记链接元素选择器)，targetSelector:[string](锚记书签元素选择器)}
+        {clickSelector:'#c1', targetSelector:'#t1'},
+        {clickSelector:'#c2', targetSelector:'#t2'},
+        {clickSelector:'#c3', targetSelector:'#t3'},
+        {clickSelector:'#c4', targetSelector:'#t4'},
+        {clickSelector:'#c5', targetSelector:'#t5'},
         ...
-    ],
-    watch_keyup:false,　　　//　当页面上按键抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false　　boolean
-    watch_mouseup:false,　　　//　当页面上鼠标抬起时,是否执行滚动条盒子的高度自动变化,可选项,默认false　　boolean
-    watch_el:{　　　//　当点击某个h5元素时, 执行滚动条高度自动变化,可选项,默认false (主要用于配合下拉插件, 点击下拉的caption元素时, 延时执行滚动条变化, 由于caption元素已经阻止了冒泡, 故而增加该选项)　　json
-        el:_('.selector', 0),　　　//　被点击的元素　　selector
-        timeout:1000　　　//　执行延时　　number
-    }
+    ]
 });
+
+**!注意: 从custom-UM-1.2.0开始, _MovingScroll()将是一个对象, 它身上有.adaptive(ms, bl)方法和setNav(arr)方法, 可以手动自适应滚动条高度和修改锚记导航设置
+
+MovingScrollObject.adaptive(ms, bl):  
+    ms:多少毫秒后执行自适应滚动条高度  number  必须;
+    bl:是否立即关闭自适应定时器  boolean  [可选, 默认true]  *注:true: 继续执行,不关闭定时器; false:立即终止执行并立即关闭定时器 
+
+MovingScrollObject.setNav(arr):
+    arr:锚记定位数组,格式同_MovingScroll()方法的navigation参数  必须  array
 ```
 基础效果 :</br>
-![image](https://github.com/ModernFarmer/Image/blob/master/_MovingScroll.gif)</br>
+![image](https://github.com/ModernFarmer/Image/blob/master/MovingScroll.gif)</br>
 基础效果源代码 :
 ```javascript
 <style>
     html, body {width:100%; height:100%; padding:0; margin:0;}
-    #box {width:60%; height:60%; overflow:hidden; background:gray; position:absolute; left:20%; top:20%;}
+    #box {width:60%; height:60%; border:10px solid black; padding-left:0; padding-right:0; background:gray; position:absolute; left:10%; top:5%;}
     #scrollBox {width:2%; height:0; background:#3D3D3D; border-radius:5px; cursor:pointer; position:absolute; right:.5%; top:0; z-index:10;}
     #listBox {width:25%; height:100%; background:#3D3D3D; position:absolute; left:0; top:0;}
     #contentBox {width:75%; position:absolute; right:0; top:0;}
     .listText {width:100%; text-align:center; line-height:40px; color:white; cursor:pointer;}
     .listText:hover {background:#020202;}
-    .moduleName {font-size:26px; font-weight:900; line-height:50px;}
-    .moduleContent {width:90%; height:150px; background:#DDDDDD; position:relative; left:5%;}
+    .moduleName {font-size:18px; font-weight:900; line-height:30px;}
+    .moduleContent {width:90%; height:100px; background:#DDDDDD; position:relative; left:5%;}
+    #btn {width:300px; height:40px; position:absolute; top:70%; left:50%;}
 </style>
 
-<script src="UM-1.0.0.js"></script>
-<script src="custom-UM-1.0.0.js"></script>
+<script src="./UM-1.3.5.js"></script>
+<script src="./custom-demo.js"></script>
 
 <html>
 <body>
@@ -106,28 +109,58 @@ _MovingScroll({　　　//　滚动条插件    参数：json
             </div>
         </div>
     </div>
+    <button id="btn">修改锚记导航设置</button>
 </body>
 </html>
 
 <script>
-_MovingScroll({
-    box:_(box),　　//　容器盒子选择器
-    contentBox:_(contentBox),　　//　滚动内容盒子选择器
-    scrollBox:_(scrollBox),　　//　滚动条盒子选择器
+var OBJECT_MS=_MovingScroll({
+    box:'#box',　　//　容器盒子选择器
+    contentBox:'#contentBox',　　//　滚动内容盒子选择器
+    scrollBox:'#scrollBox',　　//　滚动条盒子选择器
     speed:150,　　//　滚动速度
-    position:[　　//　锚记定位
-        {clickObj:_('.title1', 0), targetObj:_('.option1', 0)},
-        {clickObj:_('.title2', 0), targetObj:_('.option2', 0)},
-        {clickObj:_('.title3', 0), targetObj:_('.option3', 0)},
-        {clickObj:_('.title4', 0), targetObj:_('.option4', 0)},
-        {clickObj:_('.title5', 0), targetObj:_('.option5', 0)},
-        {clickObj:_('.title6', 0), targetObj:_('.option6', 0)},
-        {clickObj:_('.title7', 0), targetObj:_('.option7', 0)},
-        {clickObj:_('.title8', 0), targetObj:_('.option8', 0)},
-        {clickObj:_('.title9', 0), targetObj:_('.option9', 0)},
-        {clickObj:_('.title10', 0), targetObj:_('.option10', 0)}
+    navigation:[　　//　锚记定位
+        {clickSelector:'.title1', targetSelector:'.option1'},
+        {clickSelector:'.title2', targetSelector:'.option2'},
+        {clickSelector:'.title3', targetSelector:'.option3'},
+        {clickSelector:'.title4', targetSelector:'.option4'},
+        {clickSelector:'.title5', targetSelector:'.option5'},
+        {clickSelector:'.title6', targetSelector:'.option6'},
+        {clickSelector:'.title7', targetSelector:'.option7'},
+        {clickSelector:'.title8', targetSelector:'.option8'},
+        {clickSelector:'.title9', targetSelector:'.option9'},
+        {clickSelector:'.title10', targetSelector:'.option10'}
     ]
 });
+
+var num=10;
+
+btn.onclick=function(){
+    num+=1;
+    var numStr=num<100?'0'+num:''+num;
+
+    // 添加标题子选项
+    var dom1=document.createElement('div');
+    dom1.innerHTML=numStr+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    dom1.className='listText title'+num;
+    listBox.appendChild(dom1);
+
+    // 添加内容子选项
+    var dom2=document.createElement('div');
+    dom2.innerHTML='<div class="moduleName">&nbsp;&nbsp;&nbsp;&nbsp;'+numStr+'-新添加的子元素</div><div class="moduleContent"></div>';
+    dom2.className='option'+num;
+    contentBox.appendChild(dom2);
+
+    // 生成新锚记定位数组
+    var navigation=JSON.parse(JSON.stringify(OBJECT_MS.navigation));
+    navigation.push({
+        clickSelector:'.title'+num,
+        targetSelector:'.option'+num
+    });
+
+    OBJECT_MS.setNav(navigation);  // 设置锚记导航
+    OBJECT_MS.adaptive(500);  // 自适应滚动条高度
+};
 </script>
 ```
 # _PullDown()
@@ -135,43 +168,55 @@ _MovingScroll({
 #
 基本用法API :
 ```javascript
-_PullDown({　　　//　下拉选择框插件  参数：json
-    caption:_('.caption', 0),　　　//　标题选择器　　selector
-    down:_('.down', 0),　　　//　下拉内容选择器　　selector　　*!注 : 下拉内容选择器的每个选项元素(第一层子元素选项元素)都必须是一个元素节点
-    within:null,　　　//　***嵌套的父元素选择器(即父嵌套插件的down参数)　　selector　[可选, 默认null]  *!当存在父嵌套插件的时候, 必须要加within选项, 不然将无法正确完成插件功能
-    speed:1,　　　//　速度(在几秒内完成过渡)　　number　[可选, 默认0.5]
-    now:false,　　　//　下拉内容初始状态(false隐藏或者true显示)　　boolean　[可选, 默认false]
-    maxHeight:'500px',　　　//　设置下拉内容的最大高度,如果超出高度则自动产生滚动条(*注: 只能以px为单位)　　string　[可选, 默认null]　　(cunston-UM-1.1.0新增)
-    select:false,　　　//　点击下拉框是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选, 默认false]
-    D_click:false,　　　//　点击背景是否隐藏下拉框(false隐藏或者true不隐藏)　　boolean　[可选，默认false]
-    choosable:false　　　//　标题选择器内的文字是否可被选中(false不可被选中)　　boolean　[可选, 默认false]
+_PullDown({
+    caption:'#titleBtn',　　　//　标题元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为标题元素
+    down:'#contentBox',　　　//　下拉框元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为下拉框元素
+    speed:.2,　　　//　速度(在几秒内完成过渡)   number  [可选, 默认0.5]  *!注: 最大可设置为0.5
+    maxHeight:'300px',   //  下拉框体最大高度   string  [可选, 默认null]   !*注: 必须带上单位,否则报错
+    now:false,    //  下拉框初始状态   boolean  [可选, 默认false]  *注: true:下拉框初始展开; false:下拉框初始折叠
+    root:null,    //  嵌套插件的根插件  object  [可选, 默认null]  !!*注: 该属性为嵌套插件的关键属性, 具体用法看基础案例
+    select:false,   //  当点击选项时是否折叠下拉框   boolean  [可选, 默认false]  *注: true:点击选项时不折叠下拉框; false:点击选项时折叠下拉框
+    D_click:false,   //  当点击页面背景时是否折叠下拉框   boolean  [可选, 默认false]  *注: true:点击背景不折叠下拉框; false:点击背景折叠下拉框
+    choosable:false,  //  标题元素的文字内容是否可被选中   boolean  [可选, 默认false]  *注: true:可被选中; false:不可被选中
+    scrollClassName:'UM_PullDown_scrollClassName'  // 当存在滚动条时滚动条的className  string  [可选, 默认'UM_PullDown_scrollClassName']  !*注: 如果需要给不同的插件定制不同的滚动条样式, 那么可以设置scrollClassName参数, 然后再在<style>里面添加相应className的css样式
 });
 
-***注释: 如果这个_PullDown()插件(插件A)的caption元素是另一个_PullDown()插件(插件B)的down元素, 那么插件B即为父嵌套插件, 插件A即为子嵌套插件.
-**!注意: 从custom-UM-1.1.2开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
+**!注意: 从custom-UM-1.2.0开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
+
+MovingScrollObject.adaptive(ms, bl):  
+    ms:多少毫秒后执行自适应滚动条高度  number  必须;
+    bl:是否立即关闭自适应定时器  boolean  [可选, 默认true]  *注:true: 继续执行,不关闭定时器; false:立即终止执行并立即关闭定时器 
+
+PullDownObject.unfold():  展开下拉框
+
+PullDownObject.fold():  折叠下拉框
 ```
 基础效果 :</br></br>
-![image](https://github.com/ModernFarmer/Image/blob/master/_PullDown.gif)</br></br>
+![image](https://github.com/ModernFarmer/Image/blob/master/PullDown.gif)</br></br>
 基础效果源代码 :
 ```javascript
 <style>
-    html, body {width:100%; height:100%; padding:0; margin:0;}
-    #titleBtn {width:200px; height:40px; line-height:40px; text-align:center; cursor:pointer; border:1px solid #0000FF; border-radius:10px; position:absolute; left:20%; top:10%;}
-    #contentBox {width:250px; border:1px solid #FF8000; border-radius:10px; position:absolute; left:20%; top:calc(10% + 50px);}
-    .listOpt {width:85%; line-height:30px; border:1px solid gray; border-radius:5px; margin-left:5%; margin-top:5px;}
-    .listOpt_last {margin-bottom:5px;}
-    #childCaption {position:relative;}
-    .childList {width:85%; height:20px; font-size:12px; line-height:20px; border:1px solid #DFDFDF; border-radius:5px; margin-left:10%; margin-top:5px;}
-    
-    #btn1 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:20%;}
-    #btn2 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 35px);}
-    #btn3 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 70px);}
-    #btn4 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 105px);}
-    #btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover {background:#71BEE8; color:white;}
+        html, body {width:100%; height:100%; padding:0; margin:0;}
+        #titleBtn {width:200px; height:40px; line-height:40px; text-align:center; cursor:pointer; border:1px solid #0000FF; border-radius:10px; position:absolute; left:20%; top:10%;}
+        #contentBox {width:250px; padding-top:20px; padding-bottom:20px; border:1px solid gray; border-radius:3px; position:absolute; left:20%; top:calc(10% + 50px);}
+        .listOpt {width:85%; line-height:30px; border:1px solid gray; border-radius:5px; margin-left:5%; margin-top:5px;}
+        .listOpt_last {margin-bottom:5px;}
+        #childCaption {position:relative;}
+        .childList {width:85%; font-size:12px; line-height:20px; border:1px solid #DFDFDF; border-radius:5px; margin-left:10%; margin-top:5px;}
+        .smallList {width:75%; line-height:16px; font-size:12px; border:1px solid #3BCBCA; border-radius:3px; margin-left:20%; margin-top:5px;}
+        
+        #btn1 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:20%;}
+        #btn2 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 35px);}
+        #btn3 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 70px);}
+        #btn4 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 105px);}
+        #btn5 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 140px);}
+        #btn6 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 175px);}
+        #btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover,#btn5:hover,#btn6:hover {background:#71BEE8; color:white;}
+        .UM_PullDown_scrollClassName {width:5px; border-radius:3px; background:#B0B0B0;}
 </style>
 
-<script src="UM-1.0.0.js"></script>
-<script src="custom-UM-1.0.0.js"></script>
+<script src="./UM-1.3.5.js"></script>
+<script src="./custom-UM-1.2.0.js"></script>
 
 <html>
 <body>
@@ -181,13 +226,24 @@ _PullDown({　　　//　下拉选择框插件  参数：json
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
-        <div class="listOpt" id="childCaption">&nbsp;&nbsp;&nbsp;&nbsp;option5 - 嵌套插件</div>
-        <div class="listOpt" id="childContent">
-            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption1</div>
-            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption2</div>
-            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption3</div>
-            <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption4</div>
-            <div class="childList listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;childOption5</div>
+        <div isUmCaption="on">
+            <div class="listOpt" id="childCaption">&nbsp;&nbsp;&nbsp;&nbsp;option5 - 2级嵌套</div>
+            <div class="listOpt" id="childContent">
+                <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption1</div>
+                <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption2</div>
+                <div isUmCaption="on">
+                    <div class="childList" id="smallCaption">&nbsp;&nbsp;&nbsp;&nbsp;childOption3 - 3级嵌套</div>
+                    <div class="childList" id="smallContent">
+                        <div class="smallList">smallOption1</div>
+                        <div class="smallList">smallOption2</div>
+                        <div class="smallList">smallOption3</div>
+                        <div class="smallList">smallOption4</div>
+                        <div class="smallList listOpt_last">smallOption5</div>
+                    </div>
+                </div>
+                <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption6</div>
+                <div class="childList listOpt_last">&nbsp;&nbsp;&nbsp;&nbsp;childOption7</div>
+            </div>
         </div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option6</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option7</div>
@@ -198,40 +254,61 @@ _PullDown({　　　//　下拉选择框插件  参数：json
     
     <div id="btn1">展开父插件</div>
     <div id="btn2">折叠父插件</div>
-    <div id="btn3">展开子插件</div>
-    <div id="btn4">折叠子插件</div>
+    <div id="btn3">展开2级嵌套插件</div>
+    <div id="btn4">折叠2级嵌套插件</div>
+    <div id="btn5">展开3级嵌套插件</div>
+    <div id="btn6">折叠3级嵌套插件</div>
 </body>
 </html>
 
 <script>
-let obj_parent=_PullDown({
-    caption:_(titleBtn),　　　//　标题选择器　　selector
-    down:_(contentBox),　　　//　下拉内容选择器　　selector
-    speed:.5　　　//　速度(在几秒内完成过渡)
+let OBJECT_PARENT=_PullDown({
+    caption:'#titleBtn',　　　//　标题选择器　　selector
+    down:'#contentBox',　　　//　下拉内容选择器　　selector
+    speed:.2,　　　//　速度(在几秒内完成过渡)
+    maxHeight:'300px',
+    now:false
 });
 
-let obj_child=_PullDown({
-    caption:_(childCaption),　　　//　标题选择器　　selector
-    down:_(childContent),　　　//　下拉内容选择器　　selector
-    within:_(contentBox),　　　//　嵌套的父元素选择器　　selector
-    speed:.5　　　//　速度(在几秒内完成过渡)
+let OBJECT_CHILD_1=_PullDown({
+    caption:'#childCaption',　　　//　标题选择器　　selector
+    down:'#childContent',　　　//　下拉内容选择器　　selector
+    root:OBJECT_PARENT,　　　//　嵌套的父元素选择器　　selector
+    now:true,
+    speed:.2　　　//　速度(在几秒内完成过渡)
+});
+
+let OBJECT_CHILD_2=_PullDown({
+    caption:'#smallCaption',　　　//　标题选择器　　selector
+    down:'#smallContent',　　　//　下拉内容选择器　　selector
+    root:OBJECT_PARENT,　　　//　嵌套的父元素选择器　　selector
+    now:true,
+    speed:.2　　　//　速度(在几秒内完成过渡)
 });
 
 btn1.onclick=function(){
     _stopPropagation(event);  // 阻止事件冒泡
-    obj_parent.unfold(); // 展开父插件  **! 插件对象上的unfold()方法用法
+    OBJECT_PARENT.unfold(); // 展开父插件  **! 插件对象上的unfold()方法用法
 };
 btn2.onclick=function(){
     _stopPropagation(event);  // 阻止事件冒泡
-    obj_parent.fold(); // 折叠父插件  **! 插件对象上的fold()方法用法
+    OBJECT_PARENT.fold(); // 折叠父插件  **! 插件对象上的fold()方法用法
 };
 btn3.onclick=function(){
     _stopPropagation(event);  // 阻止事件冒泡
-    obj_child.unfold(); // 展开子插件
+    OBJECT_CHILD_1.unfold(); // 展开2级嵌套插件
 };
 btn4.onclick=function(){
     _stopPropagation(event);  // 阻止事件冒泡
-    obj_child.fold(); // 折叠子插件
+    OBJECT_CHILD_1.fold(); // 折叠2级嵌套插件
+};
+btn5.onclick=function(){
+    _stopPropagation(event);  // 阻止事件冒泡
+    OBJECT_CHILD_2.unfold(); // 展开3级嵌套插件
+};
+btn6.onclick=function(){
+    _stopPropagation(event);  // 阻止事件冒泡
+    OBJECT_CHILD_2.fold(); // 折叠3级嵌套插件
 };
 </script>
 ```
