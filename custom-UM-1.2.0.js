@@ -94,14 +94,12 @@ ___constructor_MovingScroll.prototype.todo=function(){
     if(_isArray(this.position) && this.position.length>0){  // 锚记导航, 根据需要添加该选项
         for(var i=0; i<this.position.length; i++){
             (function(a){
-                this.position[a].clickObj.BD('click', function(){
+                _(this.position[a].clickSelector, 0).BD('click', function(){
                     _stopPropagation(event);
                     var h_content=this._m_h_content();
                     var h_box=this._m_h_box();
                     if(h_content<h_box)return;
-                    var mark=this.position[a].targetObj.el.offsetTop>(h_content-h_box)?-(h_content-h_box):-(this.position[a].targetObj.el.offsetTop);
-                    console.log(mark)
-                    console.log(-(this._m_h_scroll()*mark/h_box)+'px')
+                    var mark=_(this.position[a].targetSelector, 0).el.offsetTop>(h_content-h_box)?-(h_content-h_box):-(_(this.position[a].targetSelector, 0).el.offsetTop);
                     this.contentBox.transition('.5s ease-out').css({top:mark+'px'});
                     this.scrollBox.transition('.5s ease-out').css({top:-(this._m_h_scroll()*mark/h_box)+'px'});
                 }.bind(this)).BD('mouseup', function(){
