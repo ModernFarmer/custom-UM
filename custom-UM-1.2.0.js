@@ -91,7 +91,7 @@ ___constructor_MovingScroll.prototype._m_todo=function(){
         _(document).BD('mouseup', ___stopRun);
     }.bind(this));
 
-    this.setNav(this.navigation);
+    if(this.navigation)this.setNav(this.navigation);
 };
 
 ___constructor_MovingScroll.prototype.setNav=function(Navigation){  // 可以手动修改锚记导航设置
