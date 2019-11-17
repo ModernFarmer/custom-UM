@@ -173,6 +173,7 @@ _PullDown({
     down:'#contentBox',　　　//　下拉框元素的class或id　　string  必须  !*注: 插件将会以当前id或者class的第一个元素作为下拉框元素
     speed:.2,　　　//　速度(在几秒内完成过渡)   number  [可选, 默认0.5]  *!注: 最大可设置为0.5
     maxHeight:'300px',   //  下拉框体最大高度   string  [可选, 默认null]   !*注: 必须带上单位,否则报错
+        //  **如果有maxHeight参数, 需要在当前页面添加一个名为.UM_PullDown_scrollClassName的样式, 它是生成的滚动条的样式, 具体用法请看基础效果源码
     now:false,    //  下拉框初始状态   boolean  [可选, 默认false]  *注: true:下拉框初始展开; false:下拉框初始折叠
     root:null,    //  嵌套插件的根插件  object  [可选, 默认null]  !!*注: 该属性为嵌套插件的关键属性, 具体用法看基础案例
     select:false,   //  当点击选项时是否折叠下拉框   boolean  [可选, 默认false]  *注: true:点击选项时不折叠下拉框; false:点击选项时折叠下拉框
@@ -182,10 +183,6 @@ _PullDown({
 });
 
 **!注意: 从custom-UM-1.2.0开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
-
-MovingScrollObject.adaptive(ms, bl):  
-    ms:多少毫秒后执行自适应滚动条高度  number  必须;
-    bl:是否立即关闭自适应定时器  boolean  [可选, 默认true]  *注:true: 继续执行,不关闭定时器; false:立即终止执行并立即关闭定时器 
 
 PullDownObject.unfold():  展开下拉框
 
@@ -212,6 +209,7 @@ PullDownObject.fold():  折叠下拉框
         #btn5 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 140px);}
         #btn6 {width:200px; height:30px; line-height:30px; border-radius:3px; border:1px dashed salmon; text-align:center; cursor:pointer; background:#e9e9e9; position:absolute; left:40%; top:calc(20% + 175px);}
         #btn1:hover,#btn2:hover,#btn3:hover,#btn4:hover,#btn5:hover,#btn6:hover {background:#71BEE8; color:white;}
+        /* 固定名称为 .UM_PullDown_scrollClassName 的样式代表产生的滚动条的样式, 默认滚动条是没有宽度的, 所以在没有设置.UM_PullDown_scrollClassName的情况下下拉框体式看不到滚动条的(鼠标滚轮滚动功能还是可以正常使用的)*/
         .UM_PullDown_scrollClassName {width:5px; border-radius:3px; background:#B0B0B0;}
 </style>
 
@@ -226,7 +224,7 @@ PullDownObject.fold():  折叠下拉框
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option2</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option3</div>
         <div class="listOpt">&nbsp;&nbsp;&nbsp;&nbsp;option4</div>
-        <div isUmCaption="on">
+        <div isUmCaption="on">  <!-- 该元素是嵌套插件的caption元素, 如果给它加 isUmCaption="on" 属性, 则可以让它在被点击的时候不折叠父插件 -->
             <div class="listOpt" id="childCaption">&nbsp;&nbsp;&nbsp;&nbsp;option5 - 2级嵌套</div>
             <div class="listOpt" id="childContent">
                 <div class="childList">&nbsp;&nbsp;&nbsp;&nbsp;childOption1</div>
