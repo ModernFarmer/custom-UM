@@ -180,13 +180,16 @@ _PullDown({
     D_click:false,   //  当点击页面背景时是否折叠下拉框   boolean  [可选, 默认false]  *注: true:点击背景不折叠下拉框; false:点击背景折叠下拉框
     choosable:false,  //  标题元素的文字内容是否可被选中   boolean  [可选, 默认false]  *注: true:可被选中; false:不可被选中
     scrollClassName:'UM_PullDown_scrollClassName'  // 当存在滚动条时滚动条的className  string  [可选, 默认'UM_PullDown_scrollClassName']  !*注: 如果需要给不同的插件定制不同的滚动条样式, 那么可以设置scrollClassName参数, 然后再在<style>里面添加相应className的css样式
-});
+}, movingObj); // movingObj  外挂式_MovingScrill插件对象, 用于创建_PullDown对象后有添加或减少下拉选项的场景. [可选]
+        //(*如果创建_PullDown对象后有添加或减少下拉选项的需求, 必须有movingObj参数, 否则增加或减少下拉选项后将可能无法正常使用_PullDoen插件功能)
 
 **!注意: 从custom-UM-1.2.0开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
 
 PullDownObject.unfold():  展开下拉框
 
 PullDownObject.fold():  折叠下拉框
+
+PullDownObject.reBind():  可以重新给选项绑定内部事件(场景: 比如下拉选项增加后, 增加的选项dom应该执行该方法, 否则增加的选项被点击后不能正常隐藏下拉框)
 ```
 基础效果 :</br></br>
 ![image](https://github.com/ModernFarmer/Image/blob/master/PullDown.gif)</br></br>
