@@ -23,3 +23,6 @@
 
 1.2.2
         _PullDown()插件新增第二参数,用于配合_MovingScroll()插件; _PullDown()插件新增.reBind()方法, 用于重新给选项元素绑定内部事件.
+
+1.2.3
+        优化_PullDown()插件样式.
