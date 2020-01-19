@@ -182,7 +182,7 @@ _PullDown({
     scrollClassName:'UM_PullDown_scrollClassName'  // 当存在滚动条时滚动条的className  string  [可选, 默认'UM_PullDown_scrollClassName']  !*注: 如果需要给不同的插件定制不同的滚动条样式, 那么可以设置scrollClassName参数, 然后再在<style>里面添加相应className的css样式
 }, movingObj, fn); // movingObj  外挂式_MovingScrill插件对象, 用于创建_PullDown对象后有添加或减少下拉选项的场景. [可选]
         //(*如果创建_PullDown对象后有添加或减少下拉选项的需求, 必须有movingObj参数, 否则增加或减少下拉选项后将可能无法正常使用_PullDoen插件功能)
-        // fn 点击caption元素的回调方法 [function] 该回调会在_MovingScrill插件的now参数改变之后执行 (1.2.4新增)
+        // fn 点击caption元素的回调方法 [function] 该回调会在_MovingScrill插件的now参数改变之后执行, 该回调自带参数:_MovingScrill插件对象 (1.2.4新增)
 
 **!注意: 从custom-UM-1.2.0开始, _PullDown()将是一个对象, 它身上有.unfold()和.fold()两个方法, 可以手动展开和折叠下拉框.
 
